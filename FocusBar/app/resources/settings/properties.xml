@@ -1,0 +1,7 @@
+<properties>
+    <property id="weeklyGoal" type="number">5</property>
+    <property id="detoxLevel" type="number">2</property>
+    <property id="promptsOn" type="boolean">true</property>
+    <property id="demoMode" type="boolean">false</property>
+    <property id="unlockAlt" type="boolean">false</property>
+</properties>

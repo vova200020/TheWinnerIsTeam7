@@ -1,0 +1,375 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FocusPeak build plan v1</title>
+<style>
+:root{
+  --bg:#0f1419;--panel:#171d25;--panel2:#1d2530;--fg:#e6e9ef;--muted:#9aa5b5;--line:#2b3440;
+  --blue:#6ea8fe;--blue-bg:#13233a;--green:#5fd08a;--green-bg:#132c1f;--amber:#f2c661;--amber-bg:#33290f;
+  --red:#f28b82;--red-bg:#3a1a1a;--violet:#c3a6ff;--violet-bg:#271d3d;--grey:#a3abb8;--grey-bg:#242a33;
+  --code-bg:#0b0f14;--nav-w:260px;
+}
+:root[data-theme="light"]{
+  --bg:#ffffff;--panel:#f5f7fa;--panel2:#eef1f5;--fg:#1b2230;--muted:#5a6475;--line:#d8dee6;
+  --blue:#1f5fbf;--blue-bg:#e7f0fd;--green:#1d7a3e;--green-bg:#e4f5ea;--amber:#8a5d00;--amber-bg:#fdf3d8;
+  --red:#a8231a;--red-bg:#fde8e6;--violet:#5b3ea8;--violet-bg:#efe9fb;--grey:#4b5563;--grey-bg:#eceef2;--code-bg:#f0f2f5;
+}
+@media (prefers-color-scheme: light){:root:not([data-theme="dark"]){
+  --bg:#ffffff;--panel:#f5f7fa;--panel2:#eef1f5;--fg:#1b2230;--muted:#5a6475;--line:#d8dee6;
+  --blue:#1f5fbf;--blue-bg:#e7f0fd;--green:#1d7a3e;--green-bg:#e4f5ea;--amber:#8a5d00;--amber-bg:#fdf3d8;
+  --red:#a8231a;--red-bg:#fde8e6;--violet:#5b3ea8;--violet-bg:#efe9fb;--grey:#4b5563;--grey-bg:#eceef2;--code-bg:#f0f2f5;}}
+*{box-sizing:border-box}
+html{background:var(--bg);scroll-behavior:smooth;scroll-padding-top:16px}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif}
+nav#toc{position:fixed;top:0;left:0;bottom:0;width:var(--nav-w);overflow-y:auto;background:var(--panel);border-right:1px solid var(--line);padding:20px 14px}
+nav#toc .toc-title{font-weight:700;font-size:.85rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:0 0 10px}
+nav#toc ol{list-style:none;margin:0;padding:0}
+nav#toc li a{display:block;padding:4px 8px;border-radius:6px;color:var(--fg);text-decoration:none;font-size:.92rem;line-height:1.35}
+nav#toc li.sub a{padding-left:24px;font-size:.86rem;color:var(--muted)}
+nav#toc a:hover{background:var(--panel2)}
+nav#toc a.active{background:var(--blue-bg);color:var(--blue);font-weight:600}
+#theme{margin-top:16px;width:100%;padding:6px;border-radius:6px;border:1px solid var(--line);background:var(--panel2);color:var(--fg);cursor:pointer}
+#toc-btn{display:none}
+main{margin-left:var(--nav-w);padding:28px 40px 80px;max-width:calc(var(--nav-w) + 940px)}
+main>*{max-width:900px}
+h1{font-size:1.75rem;line-height:1.25;margin:0 0 18px}
+h2{font-size:1.35rem;margin:42px 0 8px;padding-bottom:6px;border-bottom:1px solid var(--line)}
+h3{font-size:1.1rem;margin:26px 0 6px;color:var(--blue)}
+.lead{font-weight:600;margin:4px 0 14px}
+p{margin:8px 0}
+a{color:var(--blue)}
+code{background:var(--code-bg);border:1px solid var(--line);border-radius:4px;padding:1px 5px;font-size:.9em}
+.callout{border-left:4px solid;border-radius:6px;padding:10px 14px;margin:14px 0}
+.callout .h{font-weight:700;margin-right:6px}
+.c-idea{border-color:var(--blue);background:var(--blue-bg)}
+.c-ok{border-color:var(--green);background:var(--green-bg)}
+.c-warn{border-color:var(--amber);background:var(--amber-bg)}
+.c-bad{border-color:var(--red);background:var(--red-bg)}
+.c-def{border-color:var(--violet);background:var(--violet-bg)}
+.keypoints{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px 18px}
+.keypoints h2{border:0;margin:0 0 6px;font-size:1.1rem}
+.keypoints ul{margin:0;padding-left:1.2em}
+.badge{display:inline-block;font-size:.78rem;font-weight:600;padding:2px 8px;border-radius:999px;white-space:nowrap}
+.b-ok{background:var(--green-bg);color:var(--green)}.b-part{background:var(--amber-bg);color:var(--amber)}
+.b-gap{background:var(--red-bg);color:var(--red)}.b-info{background:var(--blue-bg);color:var(--blue)}.b-na{background:var(--grey-bg);color:var(--grey)}
+table{border-collapse:collapse;width:100%;margin:12px 0;table-layout:fixed;font-size:.93rem}
+th,td{border:1px solid var(--line);padding:7px 9px;vertical-align:top;overflow-wrap:anywhere}
+th{background:var(--panel2);text-align:left}
+tbody tr:nth-child(even){background:var(--panel)}
+td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
+caption{caption-side:top;text-align:left;color:var(--muted);font-size:.88rem;padding-bottom:4px}
+figure{margin:16px 0;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:12px}
+figure svg{width:100%;height:auto;display:block;color:var(--fg)}
+figcaption{color:var(--muted);font-size:.88rem;margin-top:6px}
+@media (max-width:900px){
+  nav#toc{display:none;position:fixed;z-index:10;width:85%;box-shadow:none}
+  nav#toc.open{display:block}
+  #toc-btn{display:block;position:sticky;top:0;z-index:11;width:100%;padding:10px;border:0;border-bottom:1px solid var(--line);background:var(--panel);color:var(--fg);font-weight:600;text-align:left;cursor:pointer}
+  main{margin-left:0;padding:18px 16px 60px}
+}
+@media print{nav#toc,#toc-btn{display:none}main{margin:0;padding:0}}
+</style>
+</head>
+<body>
+<button id="toc-btn" aria-controls="toc" aria-expanded="false">☰ Contents</button>
+<nav id="toc" aria-label="Contents">
+  <p class="toc-title">Contents</p>
+  <ol id="toc-list"></ol>
+  <button id="theme" type="button">Light / dark</button>
+</nav>
+<main>
+<h1>FocusPeak: build plan for approval (v1)</h1>
+
+<section class="keypoints" aria-label="Key points">
+  <h2 id="key-points">📌 Key points</h2>
+  <ul>
+    <li><b>Product in one sentence:</b> a Fenix 7 Pro app that scores each focus session, makes you earn each phone break with your heart rate, and learns when and where you focus best.</li>
+    <li><b>Problem statement fit:</b> the struggle is focus. The app uses 6 watch sensors for real work: heart rate, accelerometer, Global Positioning System (GPS), barometer, temperature and Pulse Ox.</li>
+    <li><b>The plan cuts scope hard.</b> One watch app is the product. The phone page is version 3. The watch face and the community are a slide, not code.</li>
+    <li><b>Three of your ideas do not work as written:</b> the app cannot set do-not-disturb, cannot lock a phone, and barometric pressure is not a focus signal. Section 2 gives the replacement for each.</li>
+    <li><b>Four versions, each one a demo that works:</b> V0 skeleton (15 min), V1 focus loop (45 min), V2 personal baseline (30 min), V3 phone gate (30 min, optional). Code freeze at 3:15 pm.</li>
+    <li><b>I need 5 approvals</b> (section 8). After that I can work without you, except for steps on the real watch.</li>
+  </ul>
+</section>
+
+<h2 id="product">🧭 1. The product</h2>
+<p class="lead">Strava records a run, scores it and shows your trend. FocusPeak does the same for a focus session.</p>
+<figure>
+  <svg viewBox="0 0 800 250" role="img" aria-label="The focus loop: readiness check, focus session, earned break, summary, personal baseline">
+    <defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="var(--muted)"/></marker></defs>
+    <g font-family="system-ui,sans-serif" font-size="14" text-anchor="middle">
+      <rect x="10" y="30" width="140" height="80" rx="8" fill="var(--blue-bg)" stroke="var(--blue)"/>
+      <text x="80" y="58" fill="var(--fg)" font-weight="600">1. Ready?</text>
+      <text x="80" y="78" fill="var(--muted)" font-size="12">Readiness bar</text>
+      <text x="80" y="95" fill="var(--muted)" font-size="12">0 to 100 + one tip</text>
+      <rect x="190" y="30" width="140" height="80" rx="8" fill="var(--green-bg)" stroke="var(--green)"/>
+      <text x="260" y="58" fill="var(--fg)" font-weight="600">2. Focus</text>
+      <text x="260" y="78" fill="var(--muted)" font-size="12">calm timer screen</text>
+      <text x="260" y="95" fill="var(--muted)" font-size="12">stillness + heart rate</text>
+      <rect x="370" y="30" width="140" height="80" rx="8" fill="var(--amber-bg)" stroke="var(--amber)"/>
+      <text x="440" y="58" fill="var(--fg)" font-weight="600">3. Earn a break</text>
+      <text x="440" y="78" fill="var(--muted)" font-size="12">move until heart rate</text>
+      <text x="440" y="95" fill="var(--muted)" font-size="12">reaches the target</text>
+      <rect x="550" y="30" width="110" height="80" rx="8" fill="var(--amber-bg)" stroke="var(--amber)"/>
+      <text x="605" y="58" fill="var(--fg)" font-weight="600">4. Break</text>
+      <text x="605" y="78" fill="var(--muted)" font-size="12">5 min, phone</text>
+      <text x="605" y="95" fill="var(--muted)" font-size="12">is allowed</text>
+      <rect x="690" y="30" width="100" height="80" rx="8" fill="var(--violet-bg)" stroke="var(--violet)"/>
+      <text x="740" y="58" fill="var(--fg)" font-weight="600">5. Summary</text>
+      <text x="740" y="78" fill="var(--muted)" font-size="12">Focus Score</text>
+      <text x="740" y="95" fill="var(--muted)" font-size="12">streak</text>
+      <line x1="152" y1="70" x2="186" y2="70" stroke="var(--muted)" stroke-width="2" marker-end="url(#ar)"/>
+      <line x1="332" y1="70" x2="366" y2="70" stroke="var(--muted)" stroke-width="2" marker-end="url(#ar)"/>
+      <line x1="512" y1="70" x2="546" y2="70" stroke="var(--muted)" stroke-width="2" marker-end="url(#ar)"/>
+      <line x1="662" y1="70" x2="686" y2="70" stroke="var(--muted)" stroke-width="2" marker-end="url(#ar)"/>
+      <path d="M605,112 L605,140 L260,140 L260,114" fill="none" stroke="var(--muted)" stroke-width="2" marker-end="url(#ar)"/>
+      <text x="432" y="158" fill="var(--muted)" font-size="12">next focus block</text>
+      <rect x="190" y="180" width="470" height="56" rx="8" fill="var(--violet-bg)" stroke="var(--violet)"/>
+      <text x="425" y="204" fill="var(--fg)" font-weight="600">Personal baseline (on the watch)</text>
+      <text x="425" y="224" fill="var(--muted)" font-size="12">your best hours, your best places, your best block length</text>
+      <path d="M740,112 L740,208 L664,208" fill="none" stroke="var(--muted)" stroke-width="2" marker-end="url(#ar)"/>
+      <path d="M186,208 L80,208 L80,114" fill="none" stroke="var(--muted)" stroke-width="2" marker-end="url(#ar)"/>
+    </g>
+  </svg>
+  <figcaption>Figure 1. One session. The summary feeds the personal baseline, and the baseline changes the next readiness check.</figcaption>
+</figure>
+<table>
+  <caption>Table 1. The plan against the five judging criteria</caption>
+  <colgroup><col style="width:26%"><col style="width:74%"></colgroup>
+  <thead><tr><th>Criterion</th><th>How this plan scores</th></tr></thead>
+  <tbody>
+    <tr><td>Problem-Solution Fit</td><td>"You are the user": focus is on the organizers' own list. The phone is the named enemy, and the break gate deals with it</td></tr>
+    <tr><td>Execution and Deployment</td><td>A sideloaded app that a judge can run on the watch. Demo mode makes each screen reachable in 60 s</td></tr>
+    <tr><td>User Experience and Design</td><td>One number per screen. A calm session screen. Buttons only, touch is a bonus</td></tr>
+    <tr><td>Impact and Value</td><td>Habit loop: prompt (break alert), action (30 s of movement), reward (phone time, score, streak)</td></tr>
+    <tr><td>Creativity and Approach</td><td>"Earn your scroll" with heart rate, and advice that comes from your own data, not from a fixed recipe</td></tr>
+  </tbody>
+</table>
+
+<h2 id="critique">⚠️ 2. Where your notes are off track</h2>
+<p class="lead">Each row is checked against the Connect IQ documents of software development kit (SDK) 9.1.0 or a published study.</p>
+<table>
+  <colgroup><col style="width:21%"><col style="width:12%"><col style="width:34%"><col style="width:33%"></colgroup>
+  <thead><tr><th>Your idea</th><th>Verdict</th><th>Why</th><th>What the plan does instead</th></tr></thead>
+  <tbody>
+    <tr><td>Watch face + watch app + phone app + backend</td><td><span class="badge b-gap">❌ Too much</span></td><td>Four programs in about 2 hours gives four half-working programs. The judges score "does it work"</td><td>One watch app is the product. One optional phone page. The rest is a roadmap slide</td></tr>
+    <tr><td>The watch face runs the focus session</td><td><span class="badge b-gap">❌ Not possible</span></td><td>A watch face has no access to the Sensor, Position, Attention (vibration) or ActivityRecording modules (SDK App Types table). It also takes no button input</td><td>A device app. Its session screen is the calm always-visible screen: the app stays on the display of the Fenix 7 Pro while it runs</td></tr>
+    <tr><td>Use the do-not-disturb (DND) feature of Garmin</td><td><span class="badge b-part">⚠️ Read only</span></td><td>An app can read the DND state but cannot change it. Garmin lists this as an open request (<a href="https://forums.garmin.com/developer/connect-iq/i/bug-reports/feature-suggestion-allow-apps-to-control-dnd-mode-or-to-set-custom-schedules">Garmin forum</a>)</td><td>The readiness screen shows "DND off: turn it on" and gives readiness points when DND is on</td></tr>
+    <tr><td>Lock the phone</td><td><span class="badge b-part">⚠️ Soft lock only</span></td><td>A Connect IQ app cannot control the phone. A real block needs a native phone app with special permissions: not a 2-hour task</td><td>V1: honor system, the watch sees and scores restlessness. V3: a phone page that shows LOCKED until the heart rate gate opens</td></tr>
+    <tr><td>Barometer: more pressure gives more oxygen and better focus</td><td><span class="badge b-gap">❌ Weak claim</span></td><td>Weather moves pressure by a few percent. That does not change blood oxygen in a healthy person. A Garmin sensor engineer will challenge it</td><td>Barometer measures the stairs you climb in a break (a real use). Pressure stays out of the score</td></tr>
+    <tr><td>Pulse Ox as a focus input</td><td><span class="badge b-part">⚠️ Small role</span></td><td>A wrist reading needs a still arm and is close to constant in healthy users</td><td>One spot reading on the readiness screen. It lowers readiness only below 92 %</td></tr>
+    <tr><td>Temperature</td><td><span class="badge b-part">⚠️ With a label</span></td><td>Office work performance peaks near 21 to 22 °C (<a href="https://www.osti.gov/servlets/purl/903490">Seppänen 2006</a>). But the watch sensor reads warm because it touches the skin</td><td>Use the change against your own usual value, not the absolute number</td></tr>
+    <tr><td>Readiness score and sleep data from Garmin</td><td><span class="badge b-gap">❌ No API</span></td><td>SDK 9.1.0 has no call for sleep score, training readiness or heart rate variability status</td><td>Body Battery, stress, resting heart rate, recovery time and hours since wake time: all available</td></tr>
+    <tr><td>Two-week training period</td><td><span class="badge b-part">⚠️ Cannot demo</span></td><td>The judges see 3 minutes</td><td>The learning code is real and updates after each session. Demo mode loads 14 days of example sessions, marked as example data</td></tr>
+    <tr><td>Community, leaderboards, shared places</td><td><span class="badge b-na">Cut to a slide</span></td><td>Forest and Opal already have friends and leaderboards. It is not the new part, and it needs a server</td><td>A streak on the watch. One roadmap slide. Home is never shared because nothing leaves the watch</td></tr>
+    <tr><td>Workout to unlock the phone</td><td><span class="badge b-ok">✅ Keep, it is the hook</span></td><td>Short exercise gives a small to medium gain in attention (standardized mean difference 0.37, <a href="https://pubmed.ncbi.nlm.nih.gov/39883421/">meta-review of 30 meta-analyses, 2025</a>)</td><td>30 to 60 s of movement. A "Skip" path always exists, and it costs the streak</td></tr>
+    <tr><td>Within-person changes</td><td><span class="badge b-ok">✅ Keep, it is the innovation</span></td><td>No focus app found in the search adapts to the body data of the user</td><td>Section 5</td></tr>
+  </tbody>
+</table>
+<div class="callout c-warn"><span class="h">⚠️ Limit</span>The watch cannot measure focus directly. The Focus Score is a proxy from time on task, wrist stillness and a calm heart rate. The pitch must say "proxy".</div>
+
+<h2 id="market">🔎 3. What exists, and the gap</h2>
+<table>
+  <colgroup><col style="width:16%"><col style="width:40%"><col style="width:44%"></colgroup>
+  <thead><tr><th>App</th><th>What it does</th><th>What it does not do</th></tr></thead>
+  <tbody>
+    <tr><td><a href="https://forestapp.cc/">Forest</a></td><td>A tree grows while the phone stays untouched. Friends share a tree that dies if one person quits</td><td>No body data. The same recipe for each user</td></tr>
+    <tr><td>Opal</td><td>Blocks apps on the phone. Leaderboard with friends</td><td>No body data. The break is not earned</td></tr>
+    <tr><td>Focusmate</td><td>Pairs you with a person on video for 50 minutes</td><td>Needs a second person and a camera</td></tr>
+    <tr><td>Garmin (built in)</td><td>Body Battery, stress, move alert</td><td>No focus session, no link from the data to when you work best</td></tr>
+  </tbody>
+</table>
+<div class="callout c-idea"><span class="h">💡 Key idea</span>The others run on the phone, the device that distracts you. FocusPeak runs on the wrist, reads the body, and makes the phone the reward.</div>
+
+<h2 id="sensors">📡 4. Sensors and the two scores</h2>
+<p class="lead">Each sensor has one honest job. The bonus rule says "real use", so no sensor is in the app for show.</p>
+<table>
+  <colgroup><col style="width:17%"><col style="width:27%"><col style="width:38%"><col style="width:18%"></colgroup>
+  <thead><tr><th>Sensor</th><th>Connect IQ source</th><th>Job in the app</th><th>Version</th></tr></thead>
+  <tbody>
+    <tr><td>Heart rate</td><td><code>Sensor.Info.heartRate</code></td><td>The break gate. Calm-heart part of the Focus Score</td><td><span class="badge b-ok">V1</span></td></tr>
+    <tr><td>Accelerometer</td><td><code>Sensor.Info.accel</code></td><td>Wrist stillness during focus (restlessness count)</td><td><span class="badge b-ok">V1</span></td></tr>
+    <tr><td>Stress and Body Battery (from heart rate)</td><td><code>SensorHistory</code>, <code>ActivityMonitor</code></td><td>Largest part of the readiness bar</td><td><span class="badge b-ok">V1</span></td></tr>
+    <tr><td>GPS</td><td><code>Position</code>, one fix at session start</td><td>Place label for the session ("Library", "Home"). Stays on the watch</td><td><span class="badge b-info">V2</span></td></tr>
+    <tr><td>Barometer</td><td><code>Sensor.Info.altitude</code></td><td>Metres climbed in the break (stairs count as the workout)</td><td><span class="badge b-info">V2</span></td></tr>
+    <tr><td>Temperature</td><td><code>Sensor.Info.temperature</code></td><td>Warmer or cooler than your usual value: small readiness input</td><td><span class="badge b-info">V2</span></td></tr>
+    <tr><td>Pulse Ox</td><td><code>Sensor.Info.oxygenSaturation</code></td><td>Spot reading on the readiness screen, flag below 92 %</td><td><span class="badge b-info">V2</span></td></tr>
+    <tr><td>Compass, gyroscope</td><td>Not used</td><td>No honest job found. A fake use loses more than it wins</td><td><span class="badge b-na">Out</span></td></tr>
+  </tbody>
+</table>
+<table>
+  <caption>Table 2. The two scores (start weights, my decision, easy to change in one file)</caption>
+  <colgroup><col style="width:22%"><col style="width:50%"><col style="width:28%"></colgroup>
+  <thead><tr><th>Score</th><th>Inputs and weights</th><th>When the user sees it</th></tr></thead>
+  <tbody>
+    <tr><td><b>Readiness bar</b> (0 to 100)</td><td>Body Battery 30, low stress 25, your hour of day 15, your place 10, DND on 10, temperature 5, not sitting too long 5. Pulse Ox only as a flag</td><td>Before a session, with one tip: "Stress high: 2 min walk first"</td></tr>
+    <tr><td><b>Focus Score</b> (0 to 100)</td><td>Planned time completed 50, wrist stillness 30, calm heart rate 20</td><td>After a session, with the streak</td></tr>
+  </tbody>
+</table>
+
+<h2 id="personal">🧠 5. The personal baseline (the innovation)</h2>
+<p class="lead">The app starts with a standard recipe and replaces it with your own numbers, session by session.</p>
+<table>
+  <colgroup><col style="width:24%"><col style="width:40%"><col style="width:36%"></colgroup>
+  <thead><tr><th>What it learns</th><th>How (all on the watch)</th><th>What the user sees</th></tr></thead>
+  <tbody>
+    <tr><td>Your best hours</td><td>Mean Focus Score in 4 day parts: morning, afternoon, evening, night</td><td>"Your best time: morning (score 82)"</td></tr>
+    <tr><td>Your best places</td><td>GPS fix matched to at most 5 saved places within 150 m. The user picks the label from a list</td><td>"Library 84, Home 61"</td></tr>
+    <tr><td>Your block length</td><td>Typical length of the sessions that scored 70 or more, kept between 15 and 50 min</td><td>"Suggested block: 35 min"</td></tr>
+    <tr><td>Your usual values</td><td>Running mean of start heart rate and temperature</td><td>Inputs to the readiness bar</td></tr>
+  </tbody>
+</table>
+<div class="callout c-def"><span class="h">📘 Privacy</span>The session log and the places stay in the storage of the watch. In V1 and V2 no data leaves the watch. In V3 only two values leave it: locked or unlocked, and seconds left.</div>
+
+<h2 id="architecture">🏗️ 6. Architecture</h2>
+<figure>
+  <svg viewBox="0 0 800 230" role="img" aria-label="Architecture: watch app holds everything, optional relay and phone page">
+    <defs><marker id="ar2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="var(--muted)"/></marker></defs>
+    <g font-family="system-ui,sans-serif" font-size="13" text-anchor="middle">
+      <rect x="10" y="10" width="440" height="210" rx="10" fill="none" stroke="var(--green)" stroke-dasharray="6 4"/>
+      <text x="230" y="30" fill="var(--green)" font-weight="600">Watch app (V1 and V2): works with no phone</text>
+      <rect x="25" y="45" width="125" height="70" rx="8" fill="var(--blue-bg)" stroke="var(--blue)"/>
+      <text x="87" y="72" fill="var(--fg)" font-weight="600">Shell</text><text x="87" y="90" fill="var(--muted)" font-size="12">sensors or demo</text><text x="87" y="105" fill="var(--muted)" font-size="12">data, storage</text>
+      <rect x="168" y="45" width="125" height="70" rx="8" fill="var(--violet-bg)" stroke="var(--violet)"/>
+      <text x="230" y="72" fill="var(--fg)" font-weight="600">Core (pure)</text><text x="230" y="90" fill="var(--muted)" font-size="12">scores, state</text><text x="230" y="105" fill="var(--muted)" font-size="12">machine, baseline</text>
+      <rect x="311" y="45" width="125" height="70" rx="8" fill="var(--green-bg)" stroke="var(--green)"/>
+      <text x="373" y="72" fill="var(--fg)" font-weight="600">Screens</text><text x="373" y="90" fill="var(--muted)" font-size="12">5 views, glance</text><text x="373" y="105" fill="var(--muted)" font-size="12">with the streak</text>
+      <line x1="152" y1="80" x2="164" y2="80" stroke="var(--muted)" stroke-width="2" marker-end="url(#ar2)"/>
+      <line x1="295" y1="80" x2="307" y2="80" stroke="var(--muted)" stroke-width="2" marker-end="url(#ar2)"/>
+      <rect x="168" y="140" width="125" height="60" rx="8" fill="var(--grey-bg)" stroke="var(--grey)"/>
+      <text x="230" y="165" fill="var(--fg)" font-weight="600">Unit tests</text><text x="230" y="183" fill="var(--muted)" font-size="12">known answers</text>
+      <line x1="230" y1="138" x2="230" y2="119" stroke="var(--muted)" stroke-width="2" marker-end="url(#ar2)"/>
+      <rect x="25" y="140" width="125" height="60" rx="8" fill="var(--grey-bg)" stroke="var(--grey)"/>
+      <text x="87" y="165" fill="var(--fg)" font-weight="600">Activity file</text><text x="87" y="183" fill="var(--muted)" font-size="12">to Garmin Connect</text>
+      <rect x="500" y="45" width="130" height="70" rx="8" fill="var(--amber-bg)" stroke="var(--amber)"/>
+      <text x="565" y="72" fill="var(--fg)" font-weight="600">Relay (V3)</text><text x="565" y="90" fill="var(--muted)" font-size="12">40 lines of Python</text><text x="565" y="105" fill="var(--muted)" font-size="12">on the laptop</text>
+      <rect x="660" y="45" width="130" height="70" rx="8" fill="var(--amber-bg)" stroke="var(--amber)"/>
+      <text x="725" y="72" fill="var(--fg)" font-weight="600">Phone page (V3)</text><text x="725" y="90" fill="var(--muted)" font-size="12">LOCKED or</text><text x="725" y="105" fill="var(--muted)" font-size="12">UNLOCKED 4:59</text>
+      <line x1="438" y1="80" x2="496" y2="80" stroke="var(--muted)" stroke-width="2" marker-end="url(#ar2)"/>
+      <line x1="632" y1="80" x2="656" y2="80" stroke="var(--muted)" stroke-width="2" marker-end="url(#ar2)"/>
+      <text x="645" y="150" fill="var(--muted)" font-size="12">web request through Garmin Connect on the phone</text>
+      <text x="645" y="168" fill="var(--muted)" font-size="12">needs a public HTTPS address (tunnel)</text>
+    </g>
+  </svg>
+  <figcaption>Figure 2. Green dashed box: all that the demo needs. Amber: optional, built only after V2 works on the watch.</figcaption>
+</figure>
+<table>
+  <caption>Table 3. Decisions I made for you</caption>
+  <colgroup><col style="width:24%"><col style="width:34%"><col style="width:42%"></colgroup>
+  <thead><tr><th>Topic</th><th>Decision</th><th>Reason</th></tr></thead>
+  <tbody>
+    <tr><td>Name</td><td>FocusPeak</td><td>Short, fits an outdoor watch. Change it with one word</td></tr>
+    <tr><td>App type</td><td>Device app with a glance</td><td>Only this type has sensors, vibration and buttons</td></tr>
+    <tr><td>Start point</td><td>Copy the SDK samples <code>Sensor</code> and <code>RecordSample</code></td><td>House rule: never start from an empty project</td></tr>
+    <tr><td>Devices</td><td><code>fenix7pro</code> and <code>fr265</code></td><td>The judges use the Fenix 7 Pro. Your test watch is the Forerunner 265</td></tr>
+    <tr><td>Session states</td><td>Ready, Focus, Earn, Break, Summary: one state machine with one owner</td><td>A state bug in a live demo is the worst bug</td></tr>
+    <tr><td>Break gate</td><td>Heart rate at or above the larger of 100 bpm and resting + 30 bpm, held for 10 s</td><td>Reachable in 30 to 60 s of jumping jacks, not tiring</td></tr>
+    <tr><td>Demo mode</td><td>A menu item on the watch: short timers (60 s block), example 14-day log, simulated heart rate ramp</td><td>The pitch has 3 minutes, and the simulator has no real sensors</td></tr>
+    <tr><td>Phone view in V2</td><td>Save each session as an activity. It shows in Garmin Connect with the heart rate graph</td><td>A phone view for about 15 lines of code, no server</td></tr>
+    <tr><td>Phone gate in V3</td><td>Web page plus a small relay. Not a native app</td><td>The only phone path that fits in 30 minutes</td></tr>
+    <tr><td>Version control</td><td>Local git repository, one commit and one tag per version. The signing key stays out of git</td><td>We can go back to the last working demo at any time</td></tr>
+    <tr><td>Out of scope</td><td>Watch face, community, leaderboard, backend accounts, native phone app, radar and nRF boards</td><td>No time. They go on the roadmap slide</td></tr>
+  </tbody>
+</table>
+
+<h2 id="versions">🚦 7. Versions and time boxes</h2>
+<p class="lead">Each version ends with a build for both watches, a commit, a tag and a short report to you.</p>
+<table>
+  <colgroup><col style="width:9%"><col style="width:11%"><col style="width:42%"><col style="width:38%"></colgroup>
+  <thead><tr><th>Version</th><th class="num">Time (min)</th><th>What you get</th><th>Done when</th></tr></thead>
+  <tbody>
+    <tr><td><b>V0</b></td><td class="num">15</td><td>Skeleton app, git, <code>DECISIONS.md</code>, first sideload</td><td>The app opens on your Forerunner 265</td></tr>
+    <tr><td><b>V1</b></td><td class="num">45</td><td>The full loop: Ready, Focus, Earn, Break, Summary. Focus Score. Readiness bar from Body Battery, stress and DND. Vibration alerts. Demo mode</td><td>A full demo session runs in the simulator and on the watch. Core tests pass</td></tr>
+    <tr><td><b>V2</b></td><td class="num">30</td><td>Personal baseline screen, places by GPS, barometer, temperature and Pulse Ox inputs, streak on the glance, activity saved to Garmin Connect</td><td>"Best time" and "best place" show from the example log and update after a real session</td></tr>
+    <tr><td><b>V3</b> (optional)</td><td class="num">30</td><td>Phone gate page that follows the watch</td><td>The phone page changes to UNLOCKED within 5 s of the gate. If it is not stable in 30 min, I remove it</td></tr>
+    <tr><td><b>Freeze</b></td><td class="num">3:15 pm</td><td>Fallback video of the demo, then pitch work with the <code>presentation</code> skill</td><td>Three timed rehearsals</td></tr>
+  </tbody>
+</table>
+<div class="callout c-ok"><span class="h">✅ Rule</span>If time runs out, the last tagged version is the demo. V1 alone is a complete pitch.</div>
+<table>
+  <caption>Table 4. Main risks</caption>
+  <colgroup><col style="width:34%"><col style="width:66%"></colgroup>
+  <thead><tr><th>Risk</th><th>Answer</th></tr></thead>
+  <tbody>
+    <tr><td>Stress and Body Battery are empty in the simulator</td><td>Demo data source with the same interface</td></tr>
+    <tr><td>Heart rate does not rise on stage</td><td>Demo mode lowers the target. The presenter does 10 jumping jacks, which is also good theatre</td></tr>
+    <tr><td>Web requests from a sideloaded app fail at the venue</td><td>V3 is optional and has a time limit</td></tr>
+    <tr><td>Not tested on a real Fenix 7 Pro</td><td>The build targets it and the simulator shows it. I will report each result as "simulator" or "watch"</td></tr>
+  </tbody>
+</table>
+
+<h2 id="approvals">🔑 8. What I need from you</h2>
+<table>
+  <colgroup><col style="width:5%"><col style="width:45%"><col style="width:50%"></colgroup>
+  <thead><tr><th>#</th><th>Approval</th><th>Why</th></tr></thead>
+  <tbody>
+    <tr><td>1</td><td>Write app code in <code>main_project/</code></td><td>The event has started, so the "nothing already built" rule is met</td></tr>
+    <tr><td>2</td><td>Run <code>git init</code> in the project folder and commit locally (no remote, no push)</td><td>Versions and tags</td></tr>
+    <tr><td>3</td><td>Run the compiler, the simulator and the tests without asking each time</td><td>A build after each change</td></tr>
+    <tr><td>4</td><td>Copy the program file to your watch when it is plugged in</td><td>Tests on the real watch</td></tr>
+    <tr><td>5</td><td>V3 only: download the <code>cloudflared</code> tunnel program from Cloudflare (about 60 MB) and run a small Python server on the laptop</td><td>The watch can only call a public HTTPS address</td></tr>
+  </tbody>
+</table>
+<table>
+  <caption>Table 5. Three facts that only you know</caption>
+  <colgroup><col style="width:50%"><col style="width:50%"></colgroup>
+  <thead><tr><th>Question</th><th>What it changes</th></tr></thead>
+  <tbody>
+    <tr><td>Do you have a Fenix 7 Pro in your hands today, or only the Forerunner 265?</td><td>Which watch gets the on-device tests</td></tr>
+    <tr><td>Is your phone Android or iPhone, and is it paired with the test watch in Garmin Connect?</td><td>If V3 is possible at all</td></tr>
+    <tr><td>Do you have teammates who write code or build the pitch?</td><td>Who makes the slides while I build</td></tr>
+  </tbody>
+</table>
+
+<h2 id="glossary">📘 Glossary</h2>
+<table>
+  <colgroup><col style="width:20%"><col style="width:80%"></colgroup>
+  <thead><tr><th>Short form</th><th>Full form and meaning</th></tr></thead>
+  <tbody>
+    <tr><td>API</td><td>application programming interface: the calls that the watch gives to an app</td></tr>
+    <tr><td>bpm</td><td>beats per minute</td></tr>
+    <tr><td>DND</td><td>do-not-disturb: the watch setting that silences notifications</td></tr>
+    <tr><td>GPS</td><td>Global Positioning System</td></tr>
+    <tr><td>HTTPS</td><td>Hypertext Transfer Protocol Secure: an encrypted web address</td></tr>
+    <tr><td>SDK</td><td>software development kit: the Garmin compiler, simulator and documents</td></tr>
+    <tr><td>V0 to V3</td><td>The four deliverable versions of this plan</td></tr>
+  </tbody>
+</table>
+</main>
+<script>
+(function () {
+  var list = document.getElementById("toc-list"), links = [];
+  document.querySelectorAll("main h2[id], main h3[id]").forEach(function (h) {
+    var li = document.createElement("li"), a = document.createElement("a");
+    if (h.tagName === "H3") li.className = "sub";
+    a.href = "#" + h.id; a.textContent = h.textContent;
+    li.appendChild(a); list.appendChild(li); links.push([h, a]);
+  });
+  var nav = document.getElementById("toc"), btn = document.getElementById("toc-btn");
+  btn.addEventListener("click", function () {
+    var open = nav.classList.toggle("open"); btn.setAttribute("aria-expanded", open);
+  });
+  list.addEventListener("click", function (e) {
+    if (e.target.tagName === "A" && window.innerWidth <= 900) { nav.classList.remove("open"); btn.setAttribute("aria-expanded", false); }
+  });
+  var obs = new IntersectionObserver(function (entries) {
+    entries.forEach(function (en) {
+      if (!en.isIntersecting) return;
+      links.forEach(function (p) { p[1].classList.toggle("active", p[0] === en.target); });
+    });
+  }, { rootMargin: "0px 0px -70% 0px" });
+  links.forEach(function (p) { obs.observe(p[0]); });
+  var root = document.documentElement;
+  try { var saved = localStorage.getItem("theme"); if (saved) root.dataset.theme = saved; } catch (e) {}
+  document.getElementById("theme").addEventListener("click", function () {
+    var light = root.dataset.theme ? root.dataset.theme === "light"
+      : window.matchMedia("(prefers-color-scheme: light)").matches;
+    root.dataset.theme = light ? "dark" : "light";
+    try { localStorage.setItem("theme", root.dataset.theme); } catch (e) {}
+  });
+})();
+</script>
+</body>
+</html>

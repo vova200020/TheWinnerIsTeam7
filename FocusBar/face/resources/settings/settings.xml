@@ -1,0 +1,5 @@
+<settings>
+    <setting propertyKey="@Properties.demoMode" title="@Strings.DemoTitle">
+        <settingConfig type="boolean"/>
+    </setting>
+</settings>

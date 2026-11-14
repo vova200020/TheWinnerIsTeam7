@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<iq:manifest xmlns:iq="http://www.garmin.com/xml/connectiq" version="3">
+    <iq:application id="d08c5340ae7a4c8b93f3b186c6ba447f" type="watchface" name="@Strings.AppName" entry="FocusFaceApp" launcherIcon="@Drawables.LauncherIcon" minApiLevel="4.2.0">
+        <iq:products>
+            <iq:product id="fenix7pro"/>
+        </iq:products>
+        <iq:permissions>
+            <iq:uses-permission id="Background"/>
+            <iq:uses-permission id="SensorHistory"/>
+            <iq:uses-permission id="ComplicationSubscriber"/>
+        </iq:permissions>
+        <iq:languages>
+            <iq:language>eng</iq:language>
+        </iq:languages>
+        <iq:barrels/>
+    </iq:application>
+</iq:manifest>

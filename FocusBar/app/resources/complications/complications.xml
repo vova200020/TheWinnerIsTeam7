@@ -1,0 +1,7 @@
+<complications>
+    <complication id="0" access="public" icon="@Drawables.ComplicationIcon"
+                  longLabel="@Strings.ComplicationLong" shortLabel="@Strings.ComplicationShort"
+                  units="@Strings.ComplicationUnits" glancePreview="false">
+        <faceIt defaultText="--"/>
+    </complication>
+</complications>

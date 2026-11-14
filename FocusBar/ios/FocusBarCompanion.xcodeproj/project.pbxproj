@@ -1,0 +1,924 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		075224E2FCB307E99797571F /* SocialView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C538E48E3473DB17A820A2F7 /* SocialView.swift */; };
+		076CBCE4C2D2D92EFC703E2A /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E631B00BC5161553376D8F9 /* Models.swift */; };
+		0B9EED79F371E4E656775714 /* SharedStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88B0931DC7AABC19104E446E /* SharedStore.swift */; };
+		0F368B714D178C2F5B035D73 /* DetoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E09B6A52E02AA0AF83E47B17 /* DetoxView.swift */; };
+		11275537818104C06DB157B3 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E631B00BC5161553376D8F9 /* Models.swift */; };
+		13192A5D4ECE56D3FB46A85B /* WatchLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51F8E2F69EE9FEEB724C9C09 /* WatchLink.swift */; };
+		139DC1E693983BEF7974C651 /* WatchLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51F8E2F69EE9FEEB724C9C09 /* WatchLink.swift */; };
+		17DD6361093437F13F77B9B6 /* ShieldPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013B8EDABB0863105BADD61C /* ShieldPolicy.swift */; };
+		29CF75B6C152C125DF416007 /* SharedStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88B0931DC7AABC19104E446E /* SharedStore.swift */; };
+		2B5BDC44DD9EF40B6A17C98D /* FamilyControls.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37872441B653308CD18A13FF /* FamilyControls.framework */; };
+		2C65E5CB35A0AC7FE3F1FE44 /* ActivityMonitor.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = ACC7F349CA88CBA0D45E6DCB /* ActivityMonitor.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		2F60E7AECB432873CF930A85 /* ShieldConfigurationExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 319C0E578EDD9E44C4600328 /* ShieldConfigurationExtension.swift */; };
+		31D52606733179E3CD8ED7BE /* Community.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65B62A8302C3FAE936A4A9D5 /* Community.swift */; };
+		3B7C2801B084FCF5B75CBF47 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E631B00BC5161553376D8F9 /* Models.swift */; };
+		3C6A5C996B817E907E15C692 /* Notifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 172DE0C7528D57143E9C2859 /* Notifier.swift */; };
+		3C70259B25B230CED333A8A3 /* FocusBarCompanionApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F36807380421BB5B549D16BA /* FocusBarCompanionApp.swift */; };
+		3D4BBF0CA57612B7B64BF9EA /* SharedStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88B0931DC7AABC19104E446E /* SharedStore.swift */; };
+		42C6F370010BADE385429950 /* Notifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 172DE0C7528D57143E9C2859 /* Notifier.swift */; };
+		4A8E1BC14F341996BBCD1C0B /* ActivityMonitorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E374DE29C1C54458DE7A2D1B /* ActivityMonitorExtension.swift */; };
+		4AC235D367878DCC9F3BB2DF /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCCE84CA8CF181A303FE0433 /* RootView.swift */; };
+		4C8A31CFD78743AE40B50A8D /* ShieldPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013B8EDABB0863105BADD61C /* ShieldPolicy.swift */; };
+		52C7F0D9F4EACD010B6E3EE4 /* CalendarSync.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E576A3E2369E81460B2DAAE /* CalendarSync.swift */; };
+		5CDD2D19576E95AE11B23B7D /* SessionDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEBD6403647D5BD4C4B2EF1F /* SessionDetailView.swift */; };
+		5D21793364D4800A3D6AD4FE /* LiteDetox.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAAD6ECDACAF0DBF42FAAC6A /* LiteDetox.swift */; };
+		5F55BA4586DB509F3264724D /* ShieldAction.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 2AF700C94FA7B6597ADC377D /* ShieldAction.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		60439B12F50DCE50794513E8 /* AppModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B938902E84D388AB5AA4AA4 /* AppModel.swift */; };
+		60D050BA3C304F83FE4F4A4A /* AppModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B938902E84D388AB5AA4AA4 /* AppModel.swift */; };
+		6F3A8525EA94BE8ADCD4FCFE /* ShieldPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013B8EDABB0863105BADD61C /* ShieldPolicy.swift */; };
+		705F2112F0AB65D0DEC91D3D /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E631B00BC5161553376D8F9 /* Models.swift */; };
+		70BBC4B0A83D1F18E5D2A740 /* ConnectIQ in Frameworks */ = {isa = PBXBuildFile; productRef = 534DD9C9A6551E58483FF529 /* ConnectIQ */; };
+		719B4590F0C897F31AA7C654 /* LitePhoneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDB0E7B982812E8DFA2E5F8D /* LitePhoneView.swift */; };
+		7D7AB1538CF8AD8DAB269256 /* ShieldConfig.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = A03FF905945E07FF75433312 /* ShieldConfig.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		8020EDC96C183F790B6522BE /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E631B00BC5161553376D8F9 /* Models.swift */; };
+		8104E7C18D2E9F39AC2EFCA5 /* ConnectIQ in Frameworks */ = {isa = PBXBuildFile; productRef = 18E27ADA115A8C76A048108F /* ConnectIQ */; };
+		8DE0DA3525C6BEBC580299F4 /* FocusMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745A4C098E3560D3B257CDCD /* FocusMapView.swift */; };
+		94469551172E30C33AFE7E9C /* ManagedSettings.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 782CEA45D9458D0DD25B8A78 /* ManagedSettings.framework */; };
+		95EF5CD5EBD26C4FA360C634 /* FocusBarCompanionApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F36807380421BB5B549D16BA /* FocusBarCompanionApp.swift */; };
+		96157FF728C0D24348B6EA00 /* Components.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE8F2E89B32F1EBB33159712 /* Components.swift */; };
+		9F82D6CAF55AC97904364B65 /* DeviceActivity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A15AF50DE3071158D056265 /* DeviceActivity.framework */; };
+		AE38F6E51E195AFF85E11695 /* SessionDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEBD6403647D5BD4C4B2EF1F /* SessionDetailView.swift */; };
+		B93DC8C555C7DC3F3D9C7659 /* ShieldActionExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E79344E1CA03C66CB2F13DF /* ShieldActionExtension.swift */; };
+		BDD2185EC8CDD60D66C0C76F /* TodayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73AD964EA1B0EB7B288BDA25 /* TodayView.swift */; };
+		CE6101C73FACA92EE06667AA /* Components.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE8F2E89B32F1EBB33159712 /* Components.swift */; };
+		CFE4D09DD52B5598BFB6EB55 /* ShieldPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013B8EDABB0863105BADD61C /* ShieldPolicy.swift */; };
+		CFE6E83A96DD3E816C29D89B /* Community.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65B62A8302C3FAE936A4A9D5 /* Community.swift */; };
+		D147564AC012194B34970129 /* TodayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73AD964EA1B0EB7B288BDA25 /* TodayView.swift */; };
+		D4D16F7D88926268522D7058 /* DetoxManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040B1D218C7CCD1748D68D22 /* DetoxManager.swift */; };
+		E0B0563FDBD9E77F492C4785 /* SocialView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C538E48E3473DB17A820A2F7 /* SocialView.swift */; };
+		E26C29AAE84598C5DB5E3908 /* Notifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 172DE0C7528D57143E9C2859 /* Notifier.swift */; };
+		E39DF9E4C00995F3BA59C5BB /* FocusMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745A4C098E3560D3B257CDCD /* FocusMapView.swift */; };
+		EAE6C489750E741CB87B755A /* CalendarSync.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E576A3E2369E81460B2DAAE /* CalendarSync.swift */; };
+		EE796A7721856452BC1B6B5F /* Notifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 172DE0C7528D57143E9C2859 /* Notifier.swift */; };
+		FB976A7EA4A8462B88B980F2 /* SharedStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88B0931DC7AABC19104E446E /* SharedStore.swift */; };
+		FD2C6AD698070C98969EEBC7 /* Notifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 172DE0C7528D57143E9C2859 /* Notifier.swift */; };
+		FE2D51B4CC3EAD419EC6DE46 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCCE84CA8CF181A303FE0433 /* RootView.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		0BF85671C5B612E0BD141DD1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 67ACDB3996BDED7CD295FC3E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6DC0F32D7217FB7A2D69287C;
+			remoteInfo = ActivityMonitor;
+		};
+		1D5D14F2820EE52477740FF3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 67ACDB3996BDED7CD295FC3E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B74A7830F4BF2E3EEE8ECBF6;
+			remoteInfo = ShieldConfig;
+		};
+		3039EBADEAB818F723F00B0C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 67ACDB3996BDED7CD295FC3E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E609207F0C2F73BAE167D21C;
+			remoteInfo = ShieldAction;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		7F47A8F543A23622AD618375 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				7D7AB1538CF8AD8DAB269256 /* ShieldConfig.appex in Embed Foundation Extensions */,
+				5F55BA4586DB509F3264724D /* ShieldAction.appex in Embed Foundation Extensions */,
+				2C65E5CB35A0AC7FE3F1FE44 /* ActivityMonitor.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		013B8EDABB0863105BADD61C /* ShieldPolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShieldPolicy.swift; sourceTree = "<group>"; };
+		040B1D218C7CCD1748D68D22 /* DetoxManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetoxManager.swift; sourceTree = "<group>"; };
+		1328DF825AA3B5A90D182464 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		172DE0C7528D57143E9C2859 /* Notifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notifier.swift; sourceTree = "<group>"; };
+		1E576A3E2369E81460B2DAAE /* CalendarSync.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarSync.swift; sourceTree = "<group>"; };
+		1E79344E1CA03C66CB2F13DF /* ShieldActionExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShieldActionExtension.swift; sourceTree = "<group>"; };
+		274D430122AA73BB464C0F48 /* ShieldConfig.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ShieldConfig.entitlements; sourceTree = "<group>"; };
+		2AF700C94FA7B6597ADC377D /* ShieldAction.appex */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = "wrapper.app-extension"; path = ShieldAction.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		319C0E578EDD9E44C4600328 /* ShieldConfigurationExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShieldConfigurationExtension.swift; sourceTree = "<group>"; };
+		37872441B653308CD18A13FF /* FamilyControls.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FamilyControls.framework; path = System/Library/Frameworks/FamilyControls.framework; sourceTree = SDKROOT; };
+		4B938902E84D388AB5AA4AA4 /* AppModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppModel.swift; sourceTree = "<group>"; };
+		51F8E2F69EE9FEEB724C9C09 /* WatchLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchLink.swift; sourceTree = "<group>"; };
+		608BC0D79A42CE922B58B18D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		65B62A8302C3FAE936A4A9D5 /* Community.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Community.swift; sourceTree = "<group>"; };
+		6A15AF50DE3071158D056265 /* DeviceActivity.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DeviceActivity.framework; path = System/Library/Frameworks/DeviceActivity.framework; sourceTree = SDKROOT; };
+		6CE20D57AA135779F90D1D03 /* ActivityMonitor.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ActivityMonitor.entitlements; sourceTree = "<group>"; };
+		73AD964EA1B0EB7B288BDA25 /* TodayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayView.swift; sourceTree = "<group>"; };
+		73E27726CBF414B01BC1A2B0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		745A4C098E3560D3B257CDCD /* FocusMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusMapView.swift; sourceTree = "<group>"; };
+		782CEA45D9458D0DD25B8A78 /* ManagedSettings.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ManagedSettings.framework; path = System/Library/Frameworks/ManagedSettings.framework; sourceTree = SDKROOT; };
+		8545106EB88ECA3311981B19 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		88B0931DC7AABC19104E446E /* SharedStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedStore.swift; sourceTree = "<group>"; };
+		8A1437188ABC1289CE883668 /* FocusBarCompanion.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = FocusBarCompanion.entitlements; sourceTree = "<group>"; };
+		99167E8C7A5E0A7F34482E8B /* FocusBarLite.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FocusBarLite.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		9E631B00BC5161553376D8F9 /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
+		A03FF905945E07FF75433312 /* ShieldConfig.appex */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = "wrapper.app-extension"; path = ShieldConfig.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		ACC7F349CA88CBA0D45E6DCB /* ActivityMonitor.appex */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = "wrapper.app-extension"; path = ActivityMonitor.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		B6EA45742FA12379434C66BB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		BAB440722DE40C1C58D4CA9C /* ShieldAction.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ShieldAction.entitlements; sourceTree = "<group>"; };
+		BCCE84CA8CF181A303FE0433 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
+		BDB0E7B982812E8DFA2E5F8D /* LitePhoneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LitePhoneView.swift; sourceTree = "<group>"; };
+		C538E48E3473DB17A820A2F7 /* SocialView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialView.swift; sourceTree = "<group>"; };
+		DE8F2E89B32F1EBB33159712 /* Components.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Components.swift; sourceTree = "<group>"; };
+		DEBD6403647D5BD4C4B2EF1F /* SessionDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionDetailView.swift; sourceTree = "<group>"; };
+		E09B6A52E02AA0AF83E47B17 /* DetoxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetoxView.swift; sourceTree = "<group>"; };
+		E374DE29C1C54458DE7A2D1B /* ActivityMonitorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityMonitorExtension.swift; sourceTree = "<group>"; };
+		EAAD6ECDACAF0DBF42FAAC6A /* LiteDetox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiteDetox.swift; sourceTree = "<group>"; };
+		EBAADF54394214460459E188 /* FocusBarCompanion.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = FocusBarCompanion.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F36807380421BB5B549D16BA /* FocusBarCompanionApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusBarCompanionApp.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		204CCA79ABA9E1D84A51C396 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8104E7C18D2E9F39AC2EFCA5 /* ConnectIQ in Frameworks */,
+				2B5BDC44DD9EF40B6A17C98D /* FamilyControls.framework in Frameworks */,
+				94469551172E30C33AFE7E9C /* ManagedSettings.framework in Frameworks */,
+				9F82D6CAF55AC97904364B65 /* DeviceActivity.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3327C2F3B8FF51E15854CA88 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				70BBC4B0A83D1F18E5D2A740 /* ConnectIQ in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		1599BCD25AA0FDF35402BF53 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				6A15AF50DE3071158D056265 /* DeviceActivity.framework */,
+				37872441B653308CD18A13FF /* FamilyControls.framework */,
+				782CEA45D9458D0DD25B8A78 /* ManagedSettings.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		16CD8C9AEDA4832533915F09 /* ShieldAction */ = {
+			isa = PBXGroup;
+			children = (
+				8545106EB88ECA3311981B19 /* Info.plist */,
+				BAB440722DE40C1C58D4CA9C /* ShieldAction.entitlements */,
+				1E79344E1CA03C66CB2F13DF /* ShieldActionExtension.swift */,
+			);
+			path = ShieldAction;
+			sourceTree = "<group>";
+		};
+		232FD904ACE8457E221A47B0 /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				9E631B00BC5161553376D8F9 /* Models.swift */,
+				172DE0C7528D57143E9C2859 /* Notifier.swift */,
+				88B0931DC7AABC19104E446E /* SharedStore.swift */,
+				013B8EDABB0863105BADD61C /* ShieldPolicy.swift */,
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
+		33994B7BD6A9A338B6A90F23 /* ActivityMonitor */ = {
+			isa = PBXGroup;
+			children = (
+				6CE20D57AA135779F90D1D03 /* ActivityMonitor.entitlements */,
+				E374DE29C1C54458DE7A2D1B /* ActivityMonitorExtension.swift */,
+				73E27726CBF414B01BC1A2B0 /* Info.plist */,
+			);
+			path = ActivityMonitor;
+			sourceTree = "<group>";
+		};
+		6537BBE58E5349E1177F9C85 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				DE8F2E89B32F1EBB33159712 /* Components.swift */,
+				E09B6A52E02AA0AF83E47B17 /* DetoxView.swift */,
+				745A4C098E3560D3B257CDCD /* FocusMapView.swift */,
+				BCCE84CA8CF181A303FE0433 /* RootView.swift */,
+				DEBD6403647D5BD4C4B2EF1F /* SessionDetailView.swift */,
+				C538E48E3473DB17A820A2F7 /* SocialView.swift */,
+				73AD964EA1B0EB7B288BDA25 /* TodayView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		987B629653A97FFF6CB8FCD5 /* Lite */ = {
+			isa = PBXGroup;
+			children = (
+				1328DF825AA3B5A90D182464 /* Info.plist */,
+				EAAD6ECDACAF0DBF42FAAC6A /* LiteDetox.swift */,
+				BDB0E7B982812E8DFA2E5F8D /* LitePhoneView.swift */,
+			);
+			path = Lite;
+			sourceTree = "<group>";
+		};
+		A146FB92005D87FB150C6ACD /* ShieldConfig */ = {
+			isa = PBXGroup;
+			children = (
+				B6EA45742FA12379434C66BB /* Info.plist */,
+				274D430122AA73BB464C0F48 /* ShieldConfig.entitlements */,
+				319C0E578EDD9E44C4600328 /* ShieldConfigurationExtension.swift */,
+			);
+			path = ShieldConfig;
+			sourceTree = "<group>";
+		};
+		C54AF7E84E78A72AB5F70212 = {
+			isa = PBXGroup;
+			children = (
+				33994B7BD6A9A338B6A90F23 /* ActivityMonitor */,
+				ED64816CBFABFD7E25BEE0F0 /* App */,
+				987B629653A97FFF6CB8FCD5 /* Lite */,
+				232FD904ACE8457E221A47B0 /* Shared */,
+				16CD8C9AEDA4832533915F09 /* ShieldAction */,
+				A146FB92005D87FB150C6ACD /* ShieldConfig */,
+				1599BCD25AA0FDF35402BF53 /* Frameworks */,
+				FD90B7CAA35E8A62E5D9FB97 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		ED64816CBFABFD7E25BEE0F0 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				4B938902E84D388AB5AA4AA4 /* AppModel.swift */,
+				1E576A3E2369E81460B2DAAE /* CalendarSync.swift */,
+				65B62A8302C3FAE936A4A9D5 /* Community.swift */,
+				040B1D218C7CCD1748D68D22 /* DetoxManager.swift */,
+				8A1437188ABC1289CE883668 /* FocusBarCompanion.entitlements */,
+				F36807380421BB5B549D16BA /* FocusBarCompanionApp.swift */,
+				608BC0D79A42CE922B58B18D /* Info.plist */,
+				51F8E2F69EE9FEEB724C9C09 /* WatchLink.swift */,
+				6537BBE58E5349E1177F9C85 /* Views */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		FD90B7CAA35E8A62E5D9FB97 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				ACC7F349CA88CBA0D45E6DCB /* ActivityMonitor.appex */,
+				EBAADF54394214460459E188 /* FocusBarCompanion.app */,
+				99167E8C7A5E0A7F34482E8B /* FocusBarLite.app */,
+				2AF700C94FA7B6597ADC377D /* ShieldAction.appex */,
+				A03FF905945E07FF75433312 /* ShieldConfig.appex */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		3F7989E7B1F02D34706A127B /* FocusBarLite */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F89E11641E9C52D83A4E2EC0 /* Build configuration list for PBXNativeTarget "FocusBarLite" */;
+			buildPhases = (
+				C41A0E9882E437CBD75D4D5A /* Sources */,
+				3327C2F3B8FF51E15854CA88 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = FocusBarLite;
+			packageProductDependencies = (
+				534DD9C9A6551E58483FF529 /* ConnectIQ */,
+			);
+			productName = FocusBarLite;
+			productReference = 99167E8C7A5E0A7F34482E8B /* FocusBarLite.app */;
+			productType = "com.apple.product-type.application";
+		};
+		6DC0F32D7217FB7A2D69287C /* ActivityMonitor */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B82AEF659C5EB2032725043C /* Build configuration list for PBXNativeTarget "ActivityMonitor" */;
+			buildPhases = (
+				B6DF2912D67953517FBC9780 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ActivityMonitor;
+			packageProductDependencies = (
+			);
+			productName = ActivityMonitor;
+			productReference = ACC7F349CA88CBA0D45E6DCB /* ActivityMonitor.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+		B74A7830F4BF2E3EEE8ECBF6 /* ShieldConfig */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EC366D62FC6805908FE8EEE8 /* Build configuration list for PBXNativeTarget "ShieldConfig" */;
+			buildPhases = (
+				A275418BE1257A7A6FE84B4B /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ShieldConfig;
+			packageProductDependencies = (
+			);
+			productName = ShieldConfig;
+			productReference = A03FF905945E07FF75433312 /* ShieldConfig.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+		E609207F0C2F73BAE167D21C /* ShieldAction */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7CDE69D3B6894FB3B27D197C /* Build configuration list for PBXNativeTarget "ShieldAction" */;
+			buildPhases = (
+				7A2EE0CE10057D27AE9E4041 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ShieldAction;
+			packageProductDependencies = (
+			);
+			productName = ShieldAction;
+			productReference = 2AF700C94FA7B6597ADC377D /* ShieldAction.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+		F58B5F448431DAFFD959C864 /* FocusBarCompanion */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FC8099A4FBA60AB104621F74 /* Build configuration list for PBXNativeTarget "FocusBarCompanion" */;
+			buildPhases = (
+				4F4A0249305188104312A140 /* Sources */,
+				204CCA79ABA9E1D84A51C396 /* Frameworks */,
+				7F47A8F543A23622AD618375 /* Embed Foundation Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				DD7C5D965ED5A7CDF52FAA60 /* PBXTargetDependency */,
+				D33C94D2D96842538250DAC3 /* PBXTargetDependency */,
+				4C97DCEEFA74FE3E3F21BD77 /* PBXTargetDependency */,
+			);
+			name = FocusBarCompanion;
+			packageProductDependencies = (
+				18E27ADA115A8C76A048108F /* ConnectIQ */,
+			);
+			productName = FocusBarCompanion;
+			productReference = EBAADF54394214460459E188 /* FocusBarCompanion.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		67ACDB3996BDED7CD295FC3E /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+					3F7989E7B1F02D34706A127B = {
+						ProvisioningStyle = Automatic;
+					};
+					6DC0F32D7217FB7A2D69287C = {
+						DevelopmentTeam = "";
+						ProvisioningStyle = Automatic;
+					};
+					B74A7830F4BF2E3EEE8ECBF6 = {
+						DevelopmentTeam = "";
+						ProvisioningStyle = Automatic;
+					};
+					E609207F0C2F73BAE167D21C = {
+						DevelopmentTeam = "";
+						ProvisioningStyle = Automatic;
+					};
+					F58B5F448431DAFFD959C864 = {
+						DevelopmentTeam = "";
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = FC23F77EFBB6947C18C5A065 /* Build configuration list for PBXProject "FocusBarCompanion" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = C54AF7E84E78A72AB5F70212;
+			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				B12AA65BA4435E6F4C02DB78 /* XCRemoteSwiftPackageReference "connectiq-companion-app-sdk-ios" */,
+			);
+			preferredProjectObjectVersion = 77;
+			productRefGroup = FD90B7CAA35E8A62E5D9FB97 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				F58B5F448431DAFFD959C864 /* FocusBarCompanion */,
+				B74A7830F4BF2E3EEE8ECBF6 /* ShieldConfig */,
+				E609207F0C2F73BAE167D21C /* ShieldAction */,
+				6DC0F32D7217FB7A2D69287C /* ActivityMonitor */,
+				3F7989E7B1F02D34706A127B /* FocusBarLite */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		4F4A0249305188104312A140 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				60439B12F50DCE50794513E8 /* AppModel.swift in Sources */,
+				EAE6C489750E741CB87B755A /* CalendarSync.swift in Sources */,
+				31D52606733179E3CD8ED7BE /* Community.swift in Sources */,
+				96157FF728C0D24348B6EA00 /* Components.swift in Sources */,
+				D4D16F7D88926268522D7058 /* DetoxManager.swift in Sources */,
+				0F368B714D178C2F5B035D73 /* DetoxView.swift in Sources */,
+				3C70259B25B230CED333A8A3 /* FocusBarCompanionApp.swift in Sources */,
+				E39DF9E4C00995F3BA59C5BB /* FocusMapView.swift in Sources */,
+				076CBCE4C2D2D92EFC703E2A /* Models.swift in Sources */,
+				42C6F370010BADE385429950 /* Notifier.swift in Sources */,
+				FE2D51B4CC3EAD419EC6DE46 /* RootView.swift in Sources */,
+				AE38F6E51E195AFF85E11695 /* SessionDetailView.swift in Sources */,
+				29CF75B6C152C125DF416007 /* SharedStore.swift in Sources */,
+				CFE4D09DD52B5598BFB6EB55 /* ShieldPolicy.swift in Sources */,
+				075224E2FCB307E99797571F /* SocialView.swift in Sources */,
+				D147564AC012194B34970129 /* TodayView.swift in Sources */,
+				13192A5D4ECE56D3FB46A85B /* WatchLink.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7A2EE0CE10057D27AE9E4041 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				11275537818104C06DB157B3 /* Models.swift in Sources */,
+				3C6A5C996B817E907E15C692 /* Notifier.swift in Sources */,
+				3D4BBF0CA57612B7B64BF9EA /* SharedStore.swift in Sources */,
+				B93DC8C555C7DC3F3D9C7659 /* ShieldActionExtension.swift in Sources */,
+				17DD6361093437F13F77B9B6 /* ShieldPolicy.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A275418BE1257A7A6FE84B4B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8020EDC96C183F790B6522BE /* Models.swift in Sources */,
+				E26C29AAE84598C5DB5E3908 /* Notifier.swift in Sources */,
+				FB976A7EA4A8462B88B980F2 /* SharedStore.swift in Sources */,
+				2F60E7AECB432873CF930A85 /* ShieldConfigurationExtension.swift in Sources */,
+				4C8A31CFD78743AE40B50A8D /* ShieldPolicy.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B6DF2912D67953517FBC9780 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4A8E1BC14F341996BBCD1C0B /* ActivityMonitorExtension.swift in Sources */,
+				3B7C2801B084FCF5B75CBF47 /* Models.swift in Sources */,
+				FD2C6AD698070C98969EEBC7 /* Notifier.swift in Sources */,
+				0B9EED79F371E4E656775714 /* SharedStore.swift in Sources */,
+				6F3A8525EA94BE8ADCD4FCFE /* ShieldPolicy.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C41A0E9882E437CBD75D4D5A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				60D050BA3C304F83FE4F4A4A /* AppModel.swift in Sources */,
+				52C7F0D9F4EACD010B6E3EE4 /* CalendarSync.swift in Sources */,
+				CFE6E83A96DD3E816C29D89B /* Community.swift in Sources */,
+				CE6101C73FACA92EE06667AA /* Components.swift in Sources */,
+				95EF5CD5EBD26C4FA360C634 /* FocusBarCompanionApp.swift in Sources */,
+				8DE0DA3525C6BEBC580299F4 /* FocusMapView.swift in Sources */,
+				5D21793364D4800A3D6AD4FE /* LiteDetox.swift in Sources */,
+				719B4590F0C897F31AA7C654 /* LitePhoneView.swift in Sources */,
+				705F2112F0AB65D0DEC91D3D /* Models.swift in Sources */,
+				EE796A7721856452BC1B6B5F /* Notifier.swift in Sources */,
+				4AC235D367878DCC9F3BB2DF /* RootView.swift in Sources */,
+				5CDD2D19576E95AE11B23B7D /* SessionDetailView.swift in Sources */,
+				E0B0563FDBD9E77F492C4785 /* SocialView.swift in Sources */,
+				BDD2185EC8CDD60D66C0C76F /* TodayView.swift in Sources */,
+				139DC1E693983BEF7974C651 /* WatchLink.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		4C97DCEEFA74FE3E3F21BD77 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6DC0F32D7217FB7A2D69287C /* ActivityMonitor */;
+			targetProxy = 0BF85671C5B612E0BD141DD1 /* PBXContainerItemProxy */;
+		};
+		D33C94D2D96842538250DAC3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E609207F0C2F73BAE167D21C /* ShieldAction */;
+			targetProxy = 3039EBADEAB818F723F00B0C /* PBXContainerItemProxy */;
+		};
+		DD7C5D965ED5A7CDF52FAA60 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B74A7830F4BF2E3EEE8ECBF6 /* ShieldConfig */;
+			targetProxy = 1D5D14F2820EE52477740FF3 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		022CDBBAAD86E6A36BB6216D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = ShieldAction/ShieldAction.entitlements;
+				INFOPLIST_FILE = ShieldAction/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.focusbar.companion.shieldaction;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		0CB286729CA7DFC0A98DAADC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = ShieldAction/ShieldAction.entitlements;
+				INFOPLIST_FILE = ShieldAction/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.focusbar.companion.shieldaction;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		37A14DFD55D07FE2478A9D46 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = "";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		4B9924D1C53960E6CD73E863 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = App/FocusBarCompanion.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_FILE = App/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_BUNDLE_IDENTIFIER = com.focusbar.companion;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		7573132BFA10FAD581AE2F93 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = ShieldConfig/ShieldConfig.entitlements;
+				INFOPLIST_FILE = ShieldConfig/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.focusbar.companion.shieldconfig;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		89ECB367FA3270E405061924 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEVELOPMENT_TEAM = 74XW8XK474;
+				INFOPLIST_FILE = Lite/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_BUNDLE_IDENTIFIER = com.focusbar.lite;
+				PRODUCT_NAME = FocusBarLite;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) LITE";
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		8C81D2379695473AB3957349 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = ActivityMonitor/ActivityMonitor.entitlements;
+				INFOPLIST_FILE = ActivityMonitor/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.focusbar.companion.monitor;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		8F8D262DCC944793BAB66A20 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = App/FocusBarCompanion.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_FILE = App/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_BUNDLE_IDENTIFIER = com.focusbar.companion;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+		A3D6A96455AD7EBDF493974C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		A81158FAA9D751ADC60535FF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = ShieldConfig/ShieldConfig.entitlements;
+				INFOPLIST_FILE = ShieldConfig/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.focusbar.companion.shieldconfig;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		F742DBDE5A337473058B68FA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = ActivityMonitor/ActivityMonitor.entitlements;
+				INFOPLIST_FILE = ActivityMonitor/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.focusbar.companion.monitor;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		FBDABC30505AA319C38DD76E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEVELOPMENT_TEAM = 74XW8XK474;
+				INFOPLIST_FILE = Lite/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_BUNDLE_IDENTIFIER = com.focusbar.lite;
+				PRODUCT_NAME = FocusBarLite;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) LITE";
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		7CDE69D3B6894FB3B27D197C /* Build configuration list for PBXNativeTarget "ShieldAction" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0CB286729CA7DFC0A98DAADC /* Debug */,
+				022CDBBAAD86E6A36BB6216D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		B82AEF659C5EB2032725043C /* Build configuration list for PBXNativeTarget "ActivityMonitor" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8C81D2379695473AB3957349 /* Debug */,
+				F742DBDE5A337473058B68FA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		EC366D62FC6805908FE8EEE8 /* Build configuration list for PBXNativeTarget "ShieldConfig" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A81158FAA9D751ADC60535FF /* Debug */,
+				7573132BFA10FAD581AE2F93 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		F89E11641E9C52D83A4E2EC0 /* Build configuration list for PBXNativeTarget "FocusBarLite" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				89ECB367FA3270E405061924 /* Debug */,
+				FBDABC30505AA319C38DD76E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		FC23F77EFBB6947C18C5A065 /* Build configuration list for PBXProject "FocusBarCompanion" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A3D6A96455AD7EBDF493974C /* Debug */,
+				37A14DFD55D07FE2478A9D46 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		FC8099A4FBA60AB104621F74 /* Build configuration list for PBXNativeTarget "FocusBarCompanion" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4B9924D1C53960E6CD73E863 /* Debug */,
+				8F8D262DCC944793BAB66A20 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		B12AA65BA4435E6F4C02DB78 /* XCRemoteSwiftPackageReference "connectiq-companion-app-sdk-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/garmin/connectiq-companion-app-sdk-ios";
+			requirement = {
+				kind = exactVersion;
+				version = 1.8.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		18E27ADA115A8C76A048108F /* ConnectIQ */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B12AA65BA4435E6F4C02DB78 /* XCRemoteSwiftPackageReference "connectiq-companion-app-sdk-ios" */;
+			productName = ConnectIQ;
+		};
+		534DD9C9A6551E58483FF529 /* ConnectIQ */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B12AA65BA4435E6F4C02DB78 /* XCRemoteSwiftPackageReference "connectiq-companion-app-sdk-ios" */;
+			productName = ConnectIQ;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = 67ACDB3996BDED7CD295FC3E /* Project object */;
+}

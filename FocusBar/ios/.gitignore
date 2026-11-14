@@ -1,0 +1,4 @@
+.spm/
+.build/
+.simdev
+*.xcodeproj/xcuserdata/

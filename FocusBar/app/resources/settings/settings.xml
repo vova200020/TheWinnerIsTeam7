@@ -1,0 +1,21 @@
+<settings>
+    <setting propertyKey="@Properties.weeklyGoal" title="@Strings.GoalTitle">
+        <settingConfig type="numeric" min="1" max="14"/>
+    </setting>
+    <setting propertyKey="@Properties.detoxLevel" title="@Strings.LevelTitle">
+        <settingConfig type="list">
+            <listEntry value="0">@Strings.LevelLight</listEntry>
+            <listEntry value="1">@Strings.LevelMedium</listEntry>
+            <listEntry value="2">@Strings.LevelDeep</listEntry>
+        </settingConfig>
+    </setting>
+    <setting propertyKey="@Properties.promptsOn" title="@Strings.PromptsTitle">
+        <settingConfig type="boolean"/>
+    </setting>
+    <setting propertyKey="@Properties.demoMode" title="@Strings.DemoTitle">
+        <settingConfig type="boolean"/>
+    </setting>
+    <setting propertyKey="@Properties.unlockAlt" title="@Strings.UnlockAltTitle">
+        <settingConfig type="boolean"/>
+    </setting>
+</settings>

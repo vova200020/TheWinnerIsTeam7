@@ -1,0 +1,394 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0b0f14">
+<title>FocusPeak</title>
+<style>
+:root{--bg:#0b0f14;--panel:#141a22;--panel2:#1c242e;--fg:#eef1f5;--muted:#93a0b2;--line:#263140;
+  --good:#3ddc84;--warn:#ffb020;--bad:#ff6b5e;--calm:#4da3ff}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+#app{max-width:440px;margin:0 auto;min-height:100vh;padding:env(safe-area-inset-top) 16px 0}
+header{display:flex;justify-content:space-between;align-items:center;padding:14px 0 4px}
+header h1{font-size:1.2rem;margin:0;letter-spacing:.01em}
+header h1 b{color:var(--good)}
+.tag{font-size:.68rem;font-weight:700;color:var(--warn);border:1px solid var(--warn);border-radius:999px;padding:2px 8px;white-space:nowrap}
+main{padding-bottom:150px}
+section{display:none}section.on{display:block}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:16px;margin:12px 0}
+.card h2{font-size:.95rem;margin:0 0 4px}
+.muted{color:var(--muted);font-size:.84rem}
+.muted a{color:var(--calm)}
+.row{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.score{font-size:1.7rem;font-weight:700;font-variant-numeric:tabular-nums}
+.bar{height:8px;border-radius:4px;background:var(--panel2);overflow:hidden;margin-top:6px}
+.bar i{display:block;height:100%;border-radius:4px;transition:width .4s}
+.item{padding:10px 0;border-top:1px solid var(--line)}
+.item:first-of-type{border-top:0}
+.me{color:var(--calm)}
+.kv{display:grid;grid-template-columns:1fr auto;gap:6px 12px;margin-top:8px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;text-align:center}
+.stats b{display:block;font-size:1.5rem;font-variant-numeric:tabular-nums}
+.rank{display:inline-block;width:1.6em;color:var(--muted);font-variant-numeric:tabular-nums}
+button.kudos{background:var(--panel2);color:var(--fg);border:1px solid var(--line);border-radius:999px;padding:6px 12px;font:inherit;font-size:.85rem;cursor:pointer;min-width:64px}
+button.kudos:active{transform:scale(.96)}
+
+/* The stage: the ring that follows the watch. In the locked state it covers the whole phone. */
+#stage{text-align:center;padding:8px 0 0}
+.ringwrap{position:relative;width:min(70vw,260px);height:min(70vw,260px);margin:14px auto 10px}
+.ringwrap svg{width:100%;height:100%;transform:rotate(-90deg)}
+#ring{transition:stroke-dashoffset .9s linear,stroke .3s}
+.mid{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px}
+#g-state{font-size:.78rem;font-weight:700;letter-spacing:.14em;color:var(--calm)}
+#g-big{font-size:4rem;font-weight:700;line-height:1;font-variant-numeric:tabular-nums}
+#g-title{font-weight:700;font-size:1.1rem;margin-top:4px}
+#g-text{max-width:300px;margin:4px auto 0}
+#unlock{display:none;margin:28px auto 0;background:none;border:1px solid var(--line);color:var(--muted);border-radius:999px;padding:10px 18px;font:inherit;font-size:.82rem;cursor:pointer;position:relative;overflow:hidden;user-select:none;-webkit-user-select:none;touch-action:none}
+#unlock i{position:absolute;left:0;top:0;bottom:0;width:0;background:rgba(255,107,94,.25)}
+#unlock.holding i{width:100%;transition:width 3s linear}
+body.locked{overflow:hidden}
+body.locked #stage{position:fixed;inset:0;z-index:20;background:var(--bg);display:flex;flex-direction:column;justify-content:center;padding:24px}
+body.locked #unlock{display:block}
+body.locked nav{display:none}
+
+nav{position:fixed;left:0;right:0;bottom:0;background:rgba(20,26,34,.96);border-top:1px solid var(--line);padding-bottom:env(safe-area-inset-bottom);z-index:10}
+nav .tabs{max-width:440px;margin:0 auto;display:flex}
+nav .tabs button{flex:1;background:none;border:0;color:var(--muted);padding:9px 0 10px;font:inherit;font-size:.72rem;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:3px}
+nav .tabs svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+nav .tabs button.on{color:var(--fg);font-weight:700}
+nav .tabs button.on svg{stroke:var(--good)}
+#sim{max-width:440px;margin:0 auto;display:flex;gap:8px;align-items:center;padding:8px 16px;border-bottom:1px solid var(--line)}
+#sim button{background:var(--panel2);color:var(--fg);border:1px solid var(--line);border-radius:10px;padding:8px 12px;font:inherit;font-size:.85rem;cursor:pointer}
+#sim span{flex:1}
+</style>
+</head>
+<body>
+<div id="app">
+  <header><h1>Focus<b>Peak</b></h1><span id="tag" class="tag">EXAMPLE DATA</span></header>
+  <main>
+    <!-- Focus: follows the state of the watch -->
+    <section id="tab-focus" class="on">
+      <div id="stage">
+        <div class="ringwrap">
+          <svg viewBox="0 0 100 100" aria-hidden="true">
+            <circle cx="50" cy="50" r="45" fill="none" stroke="#263140" stroke-width="5"/>
+            <circle id="ring" cx="50" cy="50" r="45" fill="none" stroke="#4da3ff" stroke-width="5" stroke-linecap="round" stroke-dasharray="282.7" stroke-dashoffset="282.7"/>
+          </svg>
+          <div class="mid"><div id="g-state">READY</div><div id="g-big">--</div><div id="g-sub" class="muted"></div></div>
+        </div>
+        <div id="g-title">Start a focus block on your watch</div>
+        <div id="g-text" class="muted">This phone locks while you focus. You earn it back with your heart rate.</div>
+        <button id="unlock" type="button"><i></i><span style="position:relative">Emergency: hold 3 s to unlock</span></button>
+      </div>
+      <div class="card"><div class="stats">
+        <div><b id="s-streak">0</b><span class="muted">day streak</span></div>
+        <div><b id="s-week">0</b><span class="muted">min this week</span></div>
+        <div><b id="s-block">24</b><span class="muted">min block</span></div>
+      </div></div>
+      <div class="card"><div class="row"><div><h2>Last night</h2><div class="muted">From the health store of this phone. One number goes to the watch.</div></div><span id="sleep-h" class="score">6.4 h</span></div></div>
+    </section>
+
+    <!-- Journal: the own sessions -->
+    <section id="tab-journal">
+      <div class="card"><h2>This week</h2><div id="week"></div></div>
+      <div class="card"><h2>Sessions</h2><div id="journal"></div></div>
+    </section>
+
+    <!-- Friends: served by the backend. A place label only: never coordinates, never Home -->
+    <section id="tab-friends">
+      <div class="card"><div class="row"><h2 id="ch-name">Team week</h2><b id="ch-text"></b></div><div class="bar"><i id="ch-bar" style="width:0;background:var(--good)"></i></div><div class="muted" style="margin-top:6px">Every focus minute of the group counts.</div></div>
+      <div class="card"><h2>Leaderboard</h2><div id="board"></div></div>
+      <div class="card"><h2>Good places to focus</h2><div id="places"></div><div class="muted" style="margin-top:8px">Shared by label only. Home is never shared.</div></div>
+      <div class="card"><h2>Friends feed</h2><div id="feed"></div></div>
+    </section>
+
+    <!-- You: the personal baseline -->
+    <section id="tab-you">
+      <div class="card"><h2>Your best time</h2><div id="you-parts"></div></div>
+      <div class="card"><h2>Your best places</h2><div id="you-places"></div><div class="muted" style="margin-top:8px">Your own view. Other people never see Home.</div></div>
+      <div class="card"><h2>Your recipe</h2><div class="kv"><span>Focus block</span><b id="you-block">24 min</b><span>Break</span><b id="you-break">6 min</b><span>Learned from</span><b id="you-total">0 blocks</b></div><div class="muted" style="margin-top:8px">Starts at 24 + 6 min. Three good blocks in a row add 5 min, up to 90 + 15 min.</div></div>
+      <div class="card"><h2>Why it works</h2>
+        <div class="item muted"><b style="color:var(--fg)">Fixed breaks beat self-chosen breaks.</b> Less fatigue, more concentration, same work done. <a href="https://pubmed.ncbi.nlm.nih.gov/36859717/" target="_blank" rel="noopener">Biwer 2023</a></div>
+        <div class="item muted"><b style="color:var(--fg)">Move before the break.</b> One bout of exercise gives a small to medium gain in attention. <a href="https://pubmed.ncbi.nlm.nih.gov/39883421/" target="_blank" rel="noopener">Meta-review 2025</a></div>
+        <div class="item muted"><b style="color:var(--fg)">Longer breaks after hard work.</b> Short breaks raise energy, and hard tasks can need more than 10 min. <a href="https://doi.org/10.1371/journal.pone.0272460" target="_blank" rel="noopener">Albulescu 2022</a></div>
+        <div class="item muted"><b style="color:var(--fg)">Phone out of reach.</b> Attention is lower with a phone on the desk. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC10249922" target="_blank" rel="noopener">Skowronek 2023</a></div>
+        <div class="item muted">The Focus Score is a proxy: time on task, wrist stillness and a calm heart rate.</div>
+      </div>
+      <div class="card"><h2>Privacy</h2><div class="muted">Your sessions live on your watch and this phone. Friends see a score, minutes and a place label that you chose. No coordinates leave the watch.</div></div>
+    </section>
+  </main>
+</div>
+<nav>
+  <div id="sim"><span class="muted">Watch simulator</span><button id="sim-start">Start block</button><button id="sim-move">Move</button></div>
+  <div class="tabs">
+    <button data-tab="focus" class="on"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="2.5"/></svg>Focus</button>
+    <button data-tab="journal"><svg viewBox="0 0 24 24"><path d="M5 20V11M12 20V4M19 20v-7"/></svg>Journal</button>
+    <button data-tab="friends"><svg viewBox="0 0 24 24"><circle cx="8.5" cy="9" r="3"/><circle cx="16.5" cy="10" r="2.5"/><path d="M3 19c.6-3 2.8-4.5 5.5-4.5s4.900 1.500 5.500 4.500M15 14.600c2.600-.4 5 .900 6 4.400"/></svg>Friends</button>
+    <button data-tab="you"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c.8-3.800 3.600-5.500 7-5.500s6.200 1.700 7 5.500"/></svg>You</button>
+  </div>
+</nav>
+<script>
+"use strict";
+// ---------------------------------------------------------------------------------------------
+// The one integration point. A native app calls handleMessage() with each dictionary that the
+// watch sends. The contract is in LINK.md:
+//   {"t":"state","s":"ready"}
+//   {"t":"state","s":"focus","left_s":1440,"planned_s":1440}
+//   {"t":"state","s":"earn","hr":96,"target":104,"rest":58}
+//   {"t":"state","s":"break","left_s":360,"planned_s":360}
+//   {"t":"summary","score":82,"min":24,"place":"Library","streak":5,"next_min":29}
+// The phone sends {"t":"sleep","hours":6.4} to the watch.
+// ---------------------------------------------------------------------------------------------
+const $ = id => document.getElementById(id);
+const RING_LEN = 282.7;
+const C = {good: "#3ddc84", warn: "#ffb020", bad: "#ff6b5e", calm: "#4da3ff"};
+const PARTS = ["Morning", "Afternoon", "Evening", "Night"];
+const esc = s => String(s).replace(/[&<>"']/g, ch => ({"&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"}[ch]));
+const levelColor = score => score >= 70 ? C.good : score >= 40 ? C.warn : C.bad;
+const clock = s => { s = Math.max(0, s | 0); return (s / 60 | 0) + ":" + String(s % 60).padStart(2, "0"); };
+const mean = list => list.length ? Math.round(list.reduce((a, b) => a + b, 0) / list.length) : 0;
+// "2026-11-14" from the backend becomes "Today", "Yesterday" or "Thu 12 Nov". Other text passes through.
+const dayText = d => {
+  const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(d); if (!m) return d;
+  const day = new Date(+m[1], +m[2] - 1, +m[3]), now = new Date();
+  const back = Math.round((new Date(now.getFullYear(), now.getMonth(), now.getDate()) - day) / 86400000);
+  return back === 0 ? "Today" : back === 1 ? "Yesterday" : day.toLocaleDateString("en", {weekday: "short", day: "numeric", month: "short"});
+};
+const dayPart = h => h >= 5 && h < 12 ? 0 : h >= 12 && h < 17 ? 1 : h >= 17 && h < 22 ? 2 : 3;
+
+// Example data for the page without a backend: [days ago, hour, score, minutes, place].
+const EXAMPLE = [[13, 9, 78, 24, "Library"], [12, 20, 58, 24, "Home"], [11, 10, 81, 24, "Library"], [10, 14, 72, 24, "Campus"],
+  [9, 9, 84, 24, "Library"], [8, 23, 55, 19, "Home"], [7, 15, 74, 24, "Campus"], [6, 9, 86, 29, "Library"], [5, 19, 66, 24, "Home"],
+  [4, 13, 76, 29, "Campus"], [3, 10, 80, 29, "Library"], [2, 18, 65, 24, "Home"], [1, 9, 83, 29, "Library"], [1, 15, 74, 29, "Campus"]];
+const data = {
+  local: {streak: 4, next_min: 29, sessions: EXAMPLE.map(([ago, hour, score, min, place]) => ({ago, hour, score, min, place}))},
+  me: null,
+  board: [{user: "Maya", min: 310, score: 81}, {user: "Arjun", min: 265, score: 79}, {user: "Sam", min: 190, score: 74}],
+  places: [{place: "Central Library", score: 84, users: 5}, {place: "Campus Hall", score: 76, users: 4}, {place: "Corner Cafe", score: 61, users: 3}],
+  feed: [{id: 1, user: "Maya", score: 86, min: 34, place: "Central Library", ago: "20 min ago", kudos: 2},
+         {id: 2, user: "Arjun", score: 78, min: 24, place: "Campus Hall", ago: "1 h ago", kudos: 1},
+         {id: 3, user: "Sam", score: 71, min: 24, place: "", ago: "2 h ago", kudos: 0}],
+  challenge: null
+};
+
+// Builds the same shape as GET /api/me from the local example sessions.
+function localMe() {
+  const L = data.local, today = new Date();
+  const week = [];
+  for (let back = 6; back >= 0; back--) {
+    const d = new Date(today); d.setDate(d.getDate() - back);
+    const rows = L.sessions.filter(s => s.ago === back);
+    week.push({day: d.toLocaleDateString("en", {weekday: "short"}), min: rows.reduce((a, s) => a + s.min, 0), score: mean(rows.map(s => s.score))});
+  }
+  const group = keyOf => {
+    const g = {};
+    L.sessions.forEach(s => { const k = keyOf(s); if (k) (g[k] = g[k] || []).push(s.score); });
+    return Object.entries(g).map(([name, v]) => ({name, score: mean(v), n: v.length})).sort((a, b) => b.score - a.score);
+  };
+  const sessions = L.sessions.slice().reverse().map(s => ({score: s.score, min: s.min, place: s.place, part: PARTS[dayPart(s.hour)],
+    day: s.ago === 0 ? "Today" : s.ago === 1 ? "Yesterday" : s.ago + " days ago"}));
+  return {sessions, week, streak: L.streak, next_min: L.next_min, total: L.sessions.length, sleep_hours: 6.4,
+          parts: group(s => PARTS[dayPart(s.hour)]), places: group(s => s.place)};
+}
+
+// ---- drawing ---------------------------------------------------------------------------------
+function setRing(frac, color) {
+  $("ring").style.strokeDashoffset = RING_LEN * (1 - Math.min(1, Math.max(0, frac)));
+  $("ring").style.stroke = color;
+  $("g-state").style.color = color;
+}
+function stage(state, big, sub, title, text) {
+  $("g-state").textContent = state; $("g-big").textContent = big; $("g-sub").textContent = sub;
+  $("g-title").textContent = title; $("g-text").textContent = text;
+}
+const lock = {override: false, last: ""};
+function setLocked(on) { document.body.classList.toggle("locked", on && !lock.override); }
+
+function handleMessage(m) {
+  const key = m.t === "summary" ? "summary" : m.s;
+  if (key !== lock.last) {            // a new phase ends an emergency unlock, and the phone buzzes at the break
+    if (key === "break" && navigator.vibrate) navigator.vibrate([120, 80, 120]);
+    if (key !== "earn") lock.override = false;
+    lock.last = key;
+  }
+  if (m.t === "state" && m.s === "focus") {
+    setRing(1 - m.left_s / m.planned_s, C.calm);
+    stage("LOCKED", Math.ceil(m.left_s / 60), "min left", "Phone locked", "Your watch runs a focus block. Put this phone face down.");
+    setLocked(true);
+  } else if (m.t === "state" && m.s === "earn") {
+    const ok = m.hr >= m.target;
+    setRing((m.hr - m.rest) / (m.target - m.rest), ok ? C.good : C.warn);
+    stage("MOVE TO UNLOCK", m.hr || "--", "target " + m.target + " bpm", ok ? "Hold it there" : "Earn your break",
+          "Jumping jacks, stairs or a fast walk. Your heart rate opens the phone.");
+    setLocked(true);
+  } else if (m.t === "state" && m.s === "break") {
+    setRing(m.left_s / m.planned_s, C.good);
+    stage("UNLOCKED", clock(m.left_s), "break left", "Phone earned", "Enjoy the break. The phone locks again at the next block.");
+    setLocked(false);
+  } else if (m.t === "state" && m.s === "ready") {
+    setRing(0, C.calm);
+    stage("READY", "--", "", "Start a focus block on your watch", "This phone locks while you focus. You earn it back with your heart rate.");
+    setLocked(false);
+  } else if (m.t === "summary") {
+    setRing(m.score / 100, levelColor(m.score));
+    stage("FOCUS SCORE", m.score, "streak " + m.streak + (m.streak === 1 ? " day" : " days"), "Block done", "The session is in your journal.");
+    setLocked(false);
+    if (!live.on) {
+      data.local.sessions.push({ago: 0, hour: new Date().getHours(), score: m.score, min: m.min, place: m.place});
+      data.local.streak = m.streak; data.local.next_min = m.next_min;
+      data.feed.unshift({id: Date.now(), user: "You", score: m.score, min: m.min, place: m.place === "Home" ? "" : m.place, ago: "Just now", kudos: 0});
+    }
+    refresh();
+  }
+}
+
+function bars(rows, nameOf, valueOf) {
+  return rows.map(r => `<div class="item"><div class="row"><span>${nameOf(r)}</span><b>${valueOf(r)}</b></div>` +
+    `<div class="bar"><i style="width:${r.score}%;background:${levelColor(r.score)}"></i></div></div>`).join("");
+}
+function weekChart(week) {
+  const max = Math.max(30, ...week.map(d => d.min)), W = 300, H = 120, bw = 28, gap = (W - 7 * bw) / 6;
+  const cols = week.map((d, i) => {
+    const h = Math.round(80 * d.min / max), x = i * (bw + gap);
+    return `<rect x="${x}" y="${96 - h}" width="${bw}" height="${Math.max(h, 2)}" rx="6" fill="${d.min ? levelColor(d.score) : "#263140"}"/>` +
+      (d.min ? `<text x="${x + bw / 2}" y="${90 - h}" text-anchor="middle" font-size="10" fill="#93a0b2">${d.min}</text>` : "") +
+      `<text x="${x + bw / 2}" y="113" text-anchor="middle" font-size="11" fill="#93a0b2">${esc(d.day)}</text>`;
+  }).join("");
+  return `<svg viewBox="0 0 ${W} ${H}" style="width:100%;height:auto;margin-top:8px" role="img" aria-label="Focus minutes per day, color by score">${cols}</svg>` +
+    `<div class="muted">Bar height: minutes. Color: mean Focus Score of the day.</div>`;
+}
+function render() {
+  const me = data.me || localMe();
+  const weekMin = me.week.reduce((a, d) => a + d.min, 0);
+  $("s-streak").textContent = me.streak; $("s-week").textContent = weekMin; $("s-block").textContent = me.next_min;
+  $("sleep-h").textContent = (me.sleep_hours != null ? me.sleep_hours : 6.4) + " h";
+  $("week").innerHTML = weekChart(me.week);
+  $("journal").innerHTML = me.sessions.map(s => `<div class="item row"><div><b>${esc(s.place || "No place")}</b>` +
+    `<div class="muted">${esc(dayText(s.day))} · ${esc(s.part)} · ${s.min} min</div></div>` +
+    `<div class="score" style="color:${levelColor(s.score)}">${s.score}</div></div>`).join("");
+  $("you-parts").innerHTML = bars(me.parts, r => esc(r.name), r => r.score);
+  $("you-places").innerHTML = bars(me.places, r => esc(r.name) + (r.name === "Home" ? " (private)" : ""), r => r.score);
+  $("you-block").textContent = me.next_min + " min";
+  $("you-break").textContent = Math.min(15, Math.max(5, Math.round(me.next_min / 4))) + " min";
+  $("you-total").textContent = me.total + " blocks";
+
+  const mine = {user: "You", min: weekMin, score: mean(me.week.filter(d => d.min).map(d => d.score))};
+  const board = (live.on ? data.board : data.board.concat([mine])).slice().sort((a, b) => b.min - a.min);
+  $("board").innerHTML = board.map((r, i) => `<div class="item row"><span><span class="rank">${i + 1}</span>` +
+    `<b class="${r.user === "You" ? "me" : ""}">${esc(r.user)}</b></span><span>${r.min} min · <b style="color:${levelColor(r.score)}">${r.score}</b></span></div>`).join("");
+  const total = board.reduce((a, r) => a + r.min, 0);
+  const ch = data.challenge || {name: "Team week", goal_min: 1200, total_min: total, percent: Math.min(100, Math.round(total / 12))};
+  $("ch-name").textContent = ch.name; $("ch-text").textContent = ch.total_min + " / " + ch.goal_min + " min"; $("ch-bar").style.width = ch.percent + "%";
+  $("places").innerHTML = bars(data.places, r => esc(r.place), r => r.score + " · " + r.users + (r.users === 1 ? " person" : " people"));
+  $("feed").innerHTML = data.feed.slice(0, 8).map(s => `<div class="item row"><div><b class="${s.user === "You" ? "me" : ""}">${esc(s.user)}</b>` +
+    ` <b style="color:${levelColor(s.score)}">${s.score}</b><div class="muted">${esc(s.place || "Private place")} · ${s.min} min · ${esc(s.ago)}</div></div>` +
+    `<button class="kudos" data-id="${esc(s.id)}">👏 ${s.kudos}</button></div>`).join("");
+}
+$("feed").addEventListener("click", e => {
+  const b = e.target.closest("button.kudos"); if (!b) return;
+  const item = data.feed.find(s => String(s.id) === b.dataset.id); if (!item) return;
+  item.kudos++; render();
+  if (live.on) fetch("/api/kudos", {method: "POST", headers: {"Content-Type": "application/json"}, body: JSON.stringify({id: item.id})}).catch(() => {});
+});
+
+// Emergency unlock: a 3 s hold, so it is never a reflex.
+(() => {
+  const b = $("unlock"); let timer = 0;
+  const stop = () => { clearTimeout(timer); b.classList.remove("holding"); };
+  b.addEventListener("pointerdown", () => { b.classList.add("holding"); timer = setTimeout(() => { lock.override = true; setLocked(false); stop(); }, 3000); });
+  ["pointerup", "pointerleave", "pointercancel"].forEach(ev => b.addEventListener(ev, stop));
+})();
+
+// ---------------------------------------------------------------------------------------------
+// Live mode: when the backend serves this page, the real watch app (simulator or watch) drives it.
+// The page polls /api/state once per second and counts down by itself between watch messages.
+// ---------------------------------------------------------------------------------------------
+const live = {on: false, seq: -1, stateJson: "", summaryJson: "null", msg: null, at: 0, holdSummary: false};
+const getJson = path => fetch(path).then(r => r.json());
+async function refresh() {
+  if (live.on) {
+    try {
+      [data.me, data.board, data.places, data.feed, data.challenge] =
+        await Promise.all(["me", "leaderboard", "places", "feed", "challenge"].map(n => getJson("/api/" + n)));
+    } catch (e) { /* the backend stopped: keep the last data */ }
+  }
+  render();
+}
+function showLiveState() {
+  if (!live.msg || live.holdSummary) return;
+  const m = Object.assign({}, live.msg);
+  if (m.left_s !== undefined) m.left_s = Math.max(0, m.left_s - Math.floor((Date.now() - live.at) / 1000));
+  handleMessage(m);
+}
+async function pollState() {
+  try {
+    const r = await getJson("/api/state");
+    if (r.seq !== live.seq) {
+      const first = live.seq < 0;
+      live.seq = r.seq;
+      const stateJson = JSON.stringify(r.state), summaryJson = JSON.stringify(r.summary);
+      if (stateJson !== live.stateJson) {
+        live.stateJson = stateJson; live.msg = r.state;
+        live.at = Date.now() - r.age_s * 1000; live.holdSummary = false;
+      }
+      if (summaryJson !== live.summaryJson) {
+        live.summaryJson = summaryJson;
+        if (r.summary && !first) { handleMessage(r.summary); live.holdSummary = (r.state.s !== "ready"); }
+      }
+    }
+    showLiveState();
+  } catch (e) { /* the backend stopped: keep the last screen */ }
+}
+async function startLive() {
+  if (!location.protocol.startsWith("http")) return;
+  try { await getJson("/api/state"); } catch (e) { return; }
+  live.on = true;
+  $("sim").style.display = "none";
+  $("tag").textContent = "LIVE · EXAMPLE FRIENDS";
+  // A native app reads this number from the health store of the phone. Here it is an example value.
+  fetch("/api/sleep", {method: "POST", headers: {"Content-Type": "application/json"}, body: JSON.stringify({hours: 6.4})}).catch(() => {});
+  setInterval(pollState, 1000);
+  setInterval(refresh, 5000);
+  pollState(); refresh();
+}
+
+// ---------------------------------------------------------------------------------------------
+// Watch simulator: sends the same messages as the watch in demo mode, for the page without a backend.
+// ---------------------------------------------------------------------------------------------
+const sim = {state: "ready", left: 0, hr: 64, hold: 0, moving: false, wait: 0, FOCUS_S: 30, BREAK_S: 15, TARGET: 100, REST: 58, HOLD_S: 3};
+$("sim-start").onclick = () => { if (sim.state === "ready") { sim.state = "focus"; sim.left = sim.FOCUS_S; } };
+$("sim-move").onclick = () => { sim.moving = true; };
+setInterval(() => {
+  if (live.on) return;
+  if (sim.state === "focus") {
+    sim.left--;
+    handleMessage({t: "state", s: "focus", left_s: sim.left * 58, planned_s: sim.FOCUS_S * 58});
+    if (sim.left <= 0) { sim.state = "earn"; sim.hold = 0; sim.wait = 0; sim.moving = false; }
+  } else if (sim.state === "earn") {
+    if (++sim.wait >= 4) sim.moving = true;      // the demo starts to move by itself after 4 s
+    sim.hr = sim.moving ? Math.min(124, sim.hr + 5) : Math.max(64, sim.hr - 2);
+    sim.hold = sim.hr >= sim.TARGET ? sim.hold + 1 : 0;
+    handleMessage({t: "state", s: "earn", hr: sim.hr, target: sim.TARGET, rest: sim.REST});
+    if (sim.hold >= sim.HOLD_S) { sim.state = "break"; sim.left = sim.BREAK_S; }
+  } else if (sim.state === "break") {
+    sim.left--; sim.hr = Math.max(64, sim.hr - 3);
+    handleMessage({t: "state", s: "break", left_s: sim.left * 29, planned_s: sim.BREAK_S * 29});
+    if (sim.left <= 0) {
+      handleMessage({t: "summary", score: 82, min: data.local.next_min, place: "Platform Calgary", streak: data.local.streak + 1, next_min: data.local.next_min});
+      sim.state = "ready";
+    }
+  }
+}, 1000);
+
+document.querySelectorAll("nav .tabs button").forEach(b => b.onclick = () => {
+  document.querySelectorAll("nav .tabs button").forEach(x => x.classList.toggle("on", x === b));
+  document.querySelectorAll("main section").forEach(s => s.classList.toggle("on", s.id === "tab-" + b.dataset.tab));
+  window.scrollTo(0, 0);
+});
+render();
+startLive();
+</script>
+</body>
+</html>

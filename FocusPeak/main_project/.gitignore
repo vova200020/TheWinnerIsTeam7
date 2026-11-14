@@ -1,0 +1,7 @@
+bin/
+*.prg
+*.iq
+*.debug.xml
+backend/data.json
+__pycache__/
+.pytest_cache/

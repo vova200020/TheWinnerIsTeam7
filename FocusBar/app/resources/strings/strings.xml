@@ -1,0 +1,14 @@
+<strings>
+    <string id="AppName">FocusBar</string>
+    <string id="ComplicationLong">FocusBar Focus</string>
+    <string id="ComplicationShort">FOCUS</string>
+    <string id="ComplicationUnits">pts</string>
+    <string id="GoalTitle">Weekly goal (sessions)</string>
+    <string id="LevelTitle">Detox level</string>
+    <string id="LevelLight">Light: DND</string>
+    <string id="LevelMedium">Medium: DND + block apps</string>
+    <string id="LevelDeep">Deep: block apps + allow-list</string>
+    <string id="PromptsTitle">"Focus window" prompts</string>
+    <string id="DemoTitle">Demo mode (fast, scripted)</string>
+    <string id="UnlockAltTitle">Unlock with breathing instead of HR</string>
+</strings>

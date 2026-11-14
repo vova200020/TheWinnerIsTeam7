@@ -1,0 +1,147 @@
+name: FocusBarCompanion
+options:
+  bundleIdPrefix: com.focusbar
+  deploymentTarget:
+    iOS: "17.0"
+  createIntermediateGroups: true
+settings:
+  base:
+    SWIFT_VERSION: "5.0"
+    DEVELOPMENT_TEAM: ""          # set your team to run on a device
+    CODE_SIGN_STYLE: Automatic
+packages:
+  ConnectIQ:
+    url: https://github.com/garmin/connectiq-companion-app-sdk-ios
+    exactVersion: 1.8.0
+targets:
+  FocusBarCompanion:
+    type: application
+    platform: iOS
+    sources: [App, Shared]
+    dependencies:
+      - package: ConnectIQ
+      - target: ShieldConfig
+      - target: ShieldAction
+      - target: ActivityMonitor
+      - sdk: FamilyControls.framework
+      - sdk: ManagedSettings.framework
+      - sdk: DeviceActivity.framework
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.focusbar.companion
+        OTHER_LDFLAGS: ["-ObjC"]   # required by the Connect IQ SDK
+        TARGETED_DEVICE_FAMILY: "1"
+    entitlements:
+      path: App/FocusBarCompanion.entitlements
+      properties:
+        com.apple.developer.family-controls: true
+        com.apple.security.application-groups: [group.com.focusbar.companion]
+    info:
+      path: App/Info.plist
+      properties:
+        CFBundleDisplayName: FocusBar
+        UILaunchScreen: {}
+        CFBundleURLTypes:
+          - CFBundleURLName: com.focusbar.companion.ciq
+            CFBundleURLSchemes: [focusbar-ciq]
+        LSApplicationQueriesSchemes: [gcm-ciq]
+        UIBackgroundModes: [bluetooth-central]
+        NSBluetoothAlwaysUsageDescription: FocusBar talks to your Garmin watch to sync focus sessions and unlocks.
+        NSBluetoothPeripheralUsageDescription: FocusBar talks to your Garmin watch to sync focus sessions and unlocks.
+        NSCalendarsFullAccessUsageDescription: FocusBar finds events tagged #focus and sends them to your watch.
+        NSLocationWhenInUseUsageDescription: Centers the focus map near you. Your location is never uploaded.
+
+  ShieldConfig:
+    type: app-extension
+    platform: iOS
+    sources: [ShieldConfig, Shared]
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.focusbar.companion.shieldconfig
+    entitlements:
+      path: ShieldConfig/ShieldConfig.entitlements
+      properties:
+        com.apple.developer.family-controls: true
+        com.apple.security.application-groups: [group.com.focusbar.companion]
+    info:
+      path: ShieldConfig/Info.plist
+      properties:
+        CFBundleDisplayName: FocusBar Shield
+        NSExtension:
+          NSExtensionPointIdentifier: com.apple.ManagedSettingsUI.shield-configuration-service
+          NSExtensionPrincipalClass: $(PRODUCT_MODULE_NAME).ShieldConfigurationExtension
+
+  ShieldAction:
+    type: app-extension
+    platform: iOS
+    sources: [ShieldAction, Shared]
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.focusbar.companion.shieldaction
+    entitlements:
+      path: ShieldAction/ShieldAction.entitlements
+      properties:
+        com.apple.developer.family-controls: true
+        com.apple.security.application-groups: [group.com.focusbar.companion]
+    info:
+      path: ShieldAction/Info.plist
+      properties:
+        CFBundleDisplayName: FocusBar Shield Action
+        NSExtension:
+          NSExtensionPointIdentifier: com.apple.ManagedSettings.shield-action-service
+          NSExtensionPrincipalClass: $(PRODUCT_MODULE_NAME).ShieldActionExtension
+
+  ActivityMonitor:
+    type: app-extension
+    platform: iOS
+    sources: [ActivityMonitor, Shared]
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.focusbar.companion.monitor
+    entitlements:
+      path: ActivityMonitor/ActivityMonitor.entitlements
+      properties:
+        com.apple.developer.family-controls: true
+        com.apple.security.application-groups: [group.com.focusbar.companion]
+    info:
+      path: ActivityMonitor/Info.plist
+      properties:
+        CFBundleDisplayName: FocusBar Monitor
+        NSExtension:
+          NSExtensionPointIdentifier: com.apple.deviceactivity.monitor-extension
+          NSExtensionPrincipalClass: $(PRODUCT_MODULE_NAME).ActivityMonitorExtension
+
+  # Free Apple ID build: no Screen Time entitlement or extensions. Blocking is simulated
+  # in-app (Phone tab); the watch link, unlock challenge, calendar, map and friends are real.
+  FocusBarLite:
+    type: application
+    platform: iOS
+    sources:
+      - path: App
+        excludes: ["DetoxManager.swift", "Views/DetoxView.swift", "Info.plist", "*.entitlements"]
+      - Shared/Models.swift
+      - Shared/Notifier.swift
+      - Lite
+    dependencies:
+      - package: ConnectIQ
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.focusbar.lite   # change to something unique for your Apple ID
+        PRODUCT_NAME: FocusBarLite
+        OTHER_LDFLAGS: ["-ObjC"]
+        TARGETED_DEVICE_FAMILY: "1"
+        SWIFT_ACTIVE_COMPILATION_CONDITIONS: "$(inherited) LITE"
+    info:
+      path: Lite/Info.plist
+      properties:
+        CFBundleDisplayName: FocusBar
+        UILaunchScreen: {}
+        CFBundleURLTypes:
+          - CFBundleURLName: com.focusbar.lite.ciq
+            CFBundleURLSchemes: [focusbar-ciq]
+        LSApplicationQueriesSchemes: [gcm-ciq]
+        UIBackgroundModes: [bluetooth-central]
+        NSBluetoothAlwaysUsageDescription: FocusBar talks to your Garmin watch to sync focus sessions and unlocks.
+        NSBluetoothPeripheralUsageDescription: FocusBar talks to your Garmin watch to sync focus sessions and unlocks.
+        NSCalendarsFullAccessUsageDescription: FocusBar finds events tagged #focus and sends them to your watch.
+        NSLocationWhenInUseUsageDescription: Centers the focus map near you. Your location is never uploaded.
